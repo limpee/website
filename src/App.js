@@ -1,6 +1,7 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
 import "./assets/css/main.css";
+import "./assets/css/login.css";
+import "./assets/css/orcamento.css";
 import Home from "./pages/Home";
 
 function App() {

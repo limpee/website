@@ -1,0 +1,35 @@
+.container-formulario {
+  background-image: linear-gradient(to bottom, #122a57, #43639d);
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.formulario {
+  background-color: #fff;
+  padding: 15px;
+}
+
+.perfil-prestador {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.foto-perfil {
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.foto-perfil img {
+  width: 100%;
+  height: 100%;
+}
+
+.divisoria {
+  width: 90%;
+  height: 5px;
+  background-image: linear-gradient(to right, #122a57, #43639d);
+  border-radius: 5px;
+}

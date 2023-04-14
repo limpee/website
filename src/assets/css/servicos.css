@@ -1,0 +1,11 @@
+.card-servico {
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.foto {
+  background-color: grey;
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+}

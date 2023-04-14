@@ -1,4 +1,4 @@
-import imgSobre from "../assets/img/img-sobre.svg";
+import imgSobre from "../../assets/img/img-sobre.svg";
 
 function SobreNos() {
   return (

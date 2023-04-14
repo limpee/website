@@ -1,5 +1,5 @@
-import fullStar from "../assets/img/full-star.svg";
-import halfStar from "../assets/img/half-star.svg";
+import fullStar from "../../assets/img/full-star.svg";
+import halfStar from "../../assets/img/half-star.svg";
 
 function Destaques() {
   return (

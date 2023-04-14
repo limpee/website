@@ -1,7 +1,7 @@
-import Introducao from "../components/Introducao";
+import Introducao from "../components/Home/Introducao";
 import Navbar from "../components/Navbar";
-import Destaques from "../components/Destaques";
-import SobreNos from "../components/SobreNos";
+import Destaques from "../components/Home/Destaques";
+import SobreNos from "../components/Home/SobreNos";
 import Footer from "../components/Footer";
 // import { Router } from "react-router-dom";
 

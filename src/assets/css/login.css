@@ -1,0 +1,29 @@
+.frase {
+  font-size: 24px !important;
+  text-align: center;
+  font-weight: bold;
+}
+
+.frase span {
+  color: #00a3dc;
+}
+
+.btn-voltar {
+  width: 100px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.tipo-cliente {
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.prestador {
+  color: #00a3dc;
+  border-left: 1px solid #000;
+}

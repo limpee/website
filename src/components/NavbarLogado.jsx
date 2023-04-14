@@ -1,7 +1,7 @@
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function NavbarLogado() {
   return (
     <div id="header">
       <div className="container">
@@ -26,23 +26,23 @@ function Navbar() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="#servicos">
-                  Destaques
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#servicos">
-                  Sobre Nós
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link btn-entrar" to="/login">
-                  Entrar
+                <Link className="nav-link" to="/servicos">
+                  Serviços
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/cadastro" className="nav-link btn-cadastrar">
-                  Cadastre-se
+                <Link className="nav-link" to="/ranking">
+                  Ranking
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/orcamento">
+                  Orçamento
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link btn-cadastrar" to="/">
+                  Sair
                 </Link>
               </li>
             </ul>
@@ -53,4 +53,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarLogado;

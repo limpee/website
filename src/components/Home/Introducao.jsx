@@ -1,4 +1,4 @@
-import imgIntro from "../assets/img/toma.svg";
+import imgIntro from "../../assets/img/toma.svg";
 function Introducao() {
   return (
     <div id="introducao" className="block">

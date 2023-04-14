@@ -1,0 +1,65 @@
+.qualificacao {
+  background-image: linear-gradient(to right, #122a57, #43639d);
+  color: white;
+  padding: 7px 25px !important;
+}
+
+.todas-qualificacoes {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.todas-qualificacoes::-webkit-scrollbar {
+  width: 10px;
+}
+
+.todas-qualificacoes::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+  padding: 15px !important;
+  /* border-radius: 10px; */
+}
+
+/* Handle */
+.todas-qualificacoes::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to bottom, #122a57, #43639d);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.todas-qualificacoes::-webkit-scrollbar-thumb:hover {
+  background: #009eb3;
+}
+
+.container-podio {
+  position: relative;
+}
+
+.primeiro,
+.segundo,
+.terceiro {
+  position: absolute;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+}
+
+.primeiro {
+  width: 120px;
+  top: 43%;
+  left: 41.5%;
+}
+
+.segundo {
+  width: 120px;
+  text-align: center;
+  top: 48%;
+  left: 13%;
+}
+
+.terceiro {
+  width: 120px;
+  text-align: center;
+  top: 48%;
+  left: 69%;
+}
