@@ -1,3 +1,5 @@
+/** @format */
+
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 
@@ -6,9 +8,9 @@ function NavbarLogado() {
     <div id="header">
       <div className="container">
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand" href={false}>
+          <span className="navbar-brand">
             <img src={logo} className="img-fluid" alt="logo" />
-          </a>
+          </span>
           <button
             className="navbar-toggler"
             type="button"
@@ -38,6 +40,16 @@ function NavbarLogado() {
               <li className="nav-item">
                 <Link className="nav-link" to="/orcamento">
                   Orçamento
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/notificacoes-cliente">
+                  Notificações
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/notificacoes-prestador">
+                  Notificações prestador
                 </Link>
               </li>
               <li className="nav-item">

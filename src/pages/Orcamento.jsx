@@ -1,3 +1,5 @@
+/** @format */
+
 import Footer from "../components/Footer";
 import NavbarLogado from "../components/NavbarLogado";
 import { Link } from "react-router-dom";
@@ -7,7 +9,7 @@ function Orcamento() {
   return (
     <div>
       <NavbarLogado />
-      <div className="container mt-5 mb-5">
+      <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
             <h2 className="title titulo-cards mb-4">Informações pessoais</h2>
@@ -27,26 +29,32 @@ function Orcamento() {
 
                   <div className="mb-2">
                     <label htmlFor="">Escolha um:</label>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="flexCheckDefault"
                       />
-                      <label class="form-check-label" for="flexCheckDefault">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault"
+                      >
                         Default checkbox
                       </label>
                     </div>
 
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="flexCheckDefault2"
                       />
-                      <label class="form-check-label" for="flexCheckDefault2">
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault2"
+                      >
                         Default checkbox
                       </label>
                     </div>

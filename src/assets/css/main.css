@@ -1,8 +1,16 @@
-/* @import url(./bootstrap.min.css); */
+/**
+ * @format
+ * @import url(./bootstrap.min.css);
+ */
+
 /* @import url(./config.css); */
 /* @import url(./global.css); */
 /* @import url(./custom.css); */
 /* @import url(./responsive.css); */
+
+.conteudo {
+  min-height: 500px;
+}
 
 .efeito-titulos::before {
   content: "";

@@ -1,3 +1,5 @@
+/** @format */
+
 import { Link } from "react-router-dom";
 
 function Card() {
@@ -15,7 +17,9 @@ function Card() {
             <li>Tapetes</li>
           </ul>
         </div>
-        <Link className="btn btn-primary w-75">Orçamento</Link>
+        <Link className="btn btn-primary w-75" to="/orcamento">
+          Orçamento
+        </Link>
       </div>
     </div>
   );

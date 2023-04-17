@@ -1,3 +1,5 @@
+/** @format */
+
 import Footer from "../components/Footer";
 import NavbarLogado from "../components/NavbarLogado";
 import "../assets/css/servicos.css";
@@ -7,7 +9,7 @@ function Servicos() {
   return (
     <div>
       <NavbarLogado />
-      <div className="container mt-5 mb-5">
+      <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <h2 className="title titulo-cards mb-3">Prestadores de serviços</h2>
           <Card></Card>

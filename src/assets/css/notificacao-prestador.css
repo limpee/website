@@ -1,0 +1,18 @@
+/** @format */
+
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.accordion-button {
+  border: 2px solid #a6b4c8;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.accordion-button:focus {
+  border: 2px solid #a6b4c8;
+  border-radius: 5px;
+  padding: 10px;
+}

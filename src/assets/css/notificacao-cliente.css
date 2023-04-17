@@ -1,0 +1,32 @@
+/** @format */
+
+.btn-recusar {
+  background-color: #122a57;
+  color: white;
+  /* pointer-events: none; */
+  /* cursor: pointer; */
+}
+
+.btn-recusar:hover {
+  background-color: #05193d;
+  color: white;
+}
+
+.foto-perfil {
+  width: 45px;
+  height: 45px;
+  background-color: grey;
+  border-radius: 50px;
+  margin-right: 15px;
+}
+
+.item-notificacao {
+  border: 2px solid #a6b4c8;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.aceitar-recusar .btn {
+  height: 45px;
+  margin-left: 15px;
+}

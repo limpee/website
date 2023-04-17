@@ -1,3 +1,6 @@
+/** @format */
+import { Link } from "react-router-dom";
+
 import fullStar from "../../assets/img/full-star.svg";
 import halfStar from "../../assets/img/half-star.svg";
 
@@ -38,9 +41,9 @@ function Destaques() {
               <img src={fullStar} alt="" />
               <img src={halfStar} alt="" />
             </div>
-            <a href="login.html" className="btn-orcamento-card btn-block mt-4">
+            <Link to="/login" className="btn-orcamento-card btn-block mt-4">
               Orçamento
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-md-3 mb-3 mb-md-0">
@@ -67,9 +70,9 @@ function Destaques() {
               <img src={fullStar} alt="" />
               <img src={halfStar} alt="" />
             </div>
-            <a href="login.html" className="btn-orcamento-card btn-block mt-4">
+            <Link to="/login" className="btn-orcamento-card btn-block mt-4">
               Orçamento
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-md-3 mb-3 mb-md-0">
@@ -96,9 +99,9 @@ function Destaques() {
               <img src={fullStar} alt="" />
               <img src={halfStar} alt="" />
             </div>
-            <a href="login.html" className="btn-orcamento-card btn-block mt-4">
+            <Link to="/login" className="btn-orcamento-card btn-block mt-4">
               Orçamento
-            </a>
+            </Link>
           </div>
         </div>
         <div className="col-md-3">
@@ -125,9 +128,9 @@ function Destaques() {
               <img src={fullStar} alt="" />
               <img src={halfStar} alt="" />
             </div>
-            <a href="login.html" className="btn-orcamento-card btn-block mt-4">
+            <Link to="/login" className="btn-orcamento-card btn-block mt-4">
               Orçamento
-            </a>
+            </Link>
           </div>
         </div>
       </div>

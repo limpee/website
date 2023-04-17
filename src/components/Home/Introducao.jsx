@@ -1,4 +1,8 @@
+/** @format */
+
 import imgIntro from "../../assets/img/toma.svg";
+import { Link } from "react-router-dom";
+
 function Introducao() {
   return (
     <div id="introducao" className="block">
@@ -24,12 +28,12 @@ function Introducao() {
               Se cadastre gratuitamente ou contate-nos caso tenha alguma dúvida
               sobre nosso serviço.
             </p>
-            <a
-              href="cadastro.html"
+            <Link
+              to="/cadastro"
               className="btn button-primary btn-primary button d-md-inline-block d-block"
             >
               Cadastre-se
-            </a>
+            </Link>
           </div>
         </div>
       </div>

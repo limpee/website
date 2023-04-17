@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -8,6 +10,8 @@ import Cadastro from "./pages/Cadastro";
 import Servicos from "./pages/Servicos";
 import Ranking from "./pages/Ranking";
 import Orcamento from "./pages/Orcamento";
+import NotificacoesCliente from "./pages/NotificacoesCliente";
+import NotificacoesPrestador from "./pages/NotificacoesPrestador";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/orcamento",
     element: <Orcamento />,
+  },
+  {
+    path: "/notificacoes-cliente",
+    element: <NotificacoesCliente />,
+  },
+  {
+    path: "/notificacoes-prestador",
+    element: <NotificacoesPrestador />,
   },
 ]);
 
