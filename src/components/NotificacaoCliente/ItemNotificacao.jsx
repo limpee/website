@@ -6,7 +6,7 @@ function ItemNotificacao() {
     <div className="item-notificacao d-flex mb-3">
       <div className="col-md-5 d-flex align-items-center">
         <div className="foto-perfil "></div>
-        <h3 className="ml-3">Fulano - Prestador</h3>
+        <h4 className="ml-3">Fulano - Prestador</h4>
       </div>
       <div className="col-md-7 d-flex justify-content-end align-items-center aceitar-recusar">
         <Link className="btn btn-primary" to="">

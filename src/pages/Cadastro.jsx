@@ -1,10 +1,13 @@
+/** @format */
+
 import { Link } from "react-router-dom";
 import imgCadastro from "../assets/img/img-cadastro2.svg";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
+import axios from "../api/api";
+
+const URL_CLIENTE = "/cliente";
 
 function Cadastro() {
-  const cpf = useRef();
-
   const [isActive, setActive] = useState(false);
   const prestador = () => {
     setActive(false);
@@ -14,13 +17,45 @@ function Cadastro() {
     setActive(true);
   };
 
-  const mascaraCpf = () => {
-    console.log(cpf.current.value.length);
-    if (cpf.current.value.length === 3 || cpf.current.value.length === 7)
-      cpf.current.value += ".";
+  const [nome, setNome] = useState();
+  const [senha, setSenha] = useState();
+  const [senhaVerificacao, setSenhaVerificacao] = useState();
+  const [email, setEmail] = useState();
+  const [cpf, setCpf] = useState();
+  const [rg, setRg] = useState();
+  const [genero, setGenero] = useState();
+  const [telefone, setTelefone] = useState();
+  const [cep, setCep] = useState();
+  const [logradouro, setLogradouro] = useState();
+  const [numero, setNumero] = useState();
+  const [bairro, setBairro] = useState();
 
-    if (cpf.current.value.length === 3 || cpf.current.value.length === 11)
-      cpf.current.value += "-";
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        URL_CLIENTE,
+        JSON.stringify({
+          name: nome,
+          email,
+          senha,
+          cpf,
+          rg,
+          genero,
+          telefone,
+          cep,
+          logradouro,
+          numero,
+          bairro,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      console.log(response?.data);
+      console.log(JSON.stringify(response));
+    } catch (e) {}
   };
 
   return (
@@ -47,16 +82,16 @@ function Cadastro() {
             </div>
           </div>
 
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="mb-2">
               <label htmlFor="" className="form-label">
                 Nome
               </label>
               <input
+                onChange={(e) => setNome(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Informe seu nome"
-                onChange={mascaraCpf}
               />
             </div>
 
@@ -65,6 +100,7 @@ function Cadastro() {
                 E-mail
               </label>
               <input
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 className="form-control"
                 placeholder="Informe seu e-mail"
@@ -75,6 +111,7 @@ function Cadastro() {
                 Senha
               </label>
               <input
+                onChange={(e) => setSenha(e.target.value)}
                 type="password"
                 className="form-control"
                 placeholder="Informe sua senha"
@@ -85,6 +122,7 @@ function Cadastro() {
                 Confirmar senha
               </label>
               <input
+                onChange={(e) => setSenhaVerificacao(e.target.value)}
                 type="password"
                 className="form-control"
                 placeholder="Confirmar senha"
@@ -96,13 +134,11 @@ function Cadastro() {
                 CPF (apenas números)
               </label>
               <input
+                onChange={(e) => setCpf(e.target.value)}
                 type="text"
-                onChange={mascaraCpf}
-                ref={cpf}
                 max={14}
                 className="form-control campo-cpf"
                 placeholder="Informe seu CPF"
-                disabled={cpf.length === 14 ? "true" : "false"}
               />
             </div>
 
@@ -111,6 +147,7 @@ function Cadastro() {
                 RG
               </label>
               <input
+                onChange={(e) => setRg(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Informe seu RG"
@@ -122,6 +159,7 @@ function Cadastro() {
                 Gênero
               </label>
               <input
+                onChange={(e) => setGenero(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Informe seu CPF"
@@ -133,6 +171,7 @@ function Cadastro() {
                 Telefone
               </label>
               <input
+                onChange={(e) => setTelefone(e.target.value)}
                 type="text"
                 className="form-control"
                 placeholder="Informe seu telefone"
@@ -146,6 +185,7 @@ function Cadastro() {
                     CEP
                   </label>
                   <input
+                    onChange={(e) => setCep(e.target.value)}
                     type="text"
                     className="form-control"
                     placeholder="Informe seu logradouro"
@@ -158,6 +198,7 @@ function Cadastro() {
                       Logradouro
                     </label>
                     <input
+                      onChange={(e) => setLogradouro(e.target.value)}
                       type="text"
                       className="form-control"
                       placeholder="Informe seu logradouro"
@@ -168,6 +209,7 @@ function Cadastro() {
                       Número
                     </label>
                     <input
+                      onChange={(e) => setNumero(e.target.value)}
                       type="number"
                       className="form-control"
                       placeholder="nº"
@@ -180,6 +222,7 @@ function Cadastro() {
                     Bairro
                   </label>
                   <input
+                    onChange={(e) => setBairro(e.target.value)}
                     type="text"
                     className="form-control"
                     placeholder="Informe seu bairro"

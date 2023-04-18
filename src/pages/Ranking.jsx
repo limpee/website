@@ -1,14 +1,35 @@
+/** @format */
+
 import Footer from "../components/Footer";
 import NavbarLogado from "../components/NavbarLogado";
 import Qualificacao from "../components/Ranking/Qualificacao";
 import podio from "../assets/img/podio.svg";
 import "../assets/css/ranking.css";
+import axios from "../api/api";
+import { useState, useEffect } from "react";
 
 function Ranking() {
-  let posicoes = [];
-  for (let i = 1; i <= 20; i++) {
-    posicoes.push(<Qualificacao posicao={i} />);
-  }
+  let [posicoes, setPosicoes] = useState([]);
+
+  useEffect(() => {
+    const response = axios.get("/cards");
+
+    response.then((resp) => {
+      let vetor = resp.data;
+      let cardsTemp = [];
+      for (let i = 0; i < vetor.length; i++) {
+        cardsTemp.push(
+          <Qualificacao
+            key={i}
+            posicao={i + 1}
+            img={vetor[i].avatar}
+            nome={vetor[i].name}
+          />
+        );
+      }
+      setPosicoes(cardsTemp);
+    });
+  }, []);
 
   return (
     <div>

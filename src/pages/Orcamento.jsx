@@ -83,7 +83,7 @@ function Orcamento() {
           </div>
           <div className="col-md-4">
             <div className="perfil-prestador p-3 d-flex justify-content-center align-items-center flex-column">
-              <div className="foto-perfil">
+              <div className="foto-perfil foto-card">
                 <img src={fotoPerfil} alt="" />
               </div>
               <div className="divisoria mt-3 mb-3"></div>

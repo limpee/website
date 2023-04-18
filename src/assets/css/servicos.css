@@ -1,3 +1,5 @@
+/** @format */
+
 .card-servico {
   border: 1px solid #000;
   border-radius: 5px;
@@ -8,4 +10,9 @@
   border-radius: 100px;
   width: 100px;
   height: 100px;
+}
+
+.foto-card {
+  width: 85px;
+  height: 85px;
 }

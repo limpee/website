@@ -14,7 +14,7 @@ function NotificacaoAccordion(props) {
         >
           <div className="col-md-5 d-flex align-items-center">
             <div className="foto-perfil "></div>
-            <h3 className="ml-3">Fulano - Cliente</h3>
+            <h4 className="ml-3">Fulano - Cliente</h4>
           </div>
         </button>
       </h2>
