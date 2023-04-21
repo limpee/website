@@ -3,7 +3,9 @@
 import { Link } from "react-router-dom";
 import imgCadastro from "../assets/img/img-cadastro2.svg";
 import React, { useState } from "react";
-import axios from "../api/api";
+import axiosApi from "../api/api";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const URL_CLIENTE = "/cliente";
 
@@ -11,11 +13,15 @@ function Cadastro() {
   const [isActive, setActive] = useState(false);
   const prestador = () => {
     setActive(false);
+    setEnderecoActive(false);
   };
 
   const cliente = () => {
     setActive(true);
+    setEnderecoActive(false);
   };
+
+  const { register, setValue } = useForm();
 
   const [nome, setNome] = useState();
   const [senha, setSenha] = useState();
@@ -29,11 +35,12 @@ function Cadastro() {
   const [logradouro, setLogradouro] = useState();
   const [numero, setNumero] = useState();
   const [bairro, setBairro] = useState();
+  const [isEnderecoActive, setEnderecoActive] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response = await axiosApi.post(
         URL_CLIENTE,
         JSON.stringify({
           name: nome,
@@ -58,8 +65,35 @@ function Cadastro() {
     } catch (e) {}
   };
 
+  const procurarCep = (e) => {
+    if (e.target.value.length === 8) {
+      axios
+        .get(`https://viacep.com.br/ws/${e.target.value}/json/`)
+        .then((response) => {
+          setValue("logradouro", response.data.logradouro);
+          setValue("bairro", response.data.bairro);
+          setValue("cidade", response.data.localidade);
+          setValue("cidade", response.data.localidade);
+          setValue("uf", response.data.uf);
+          setValue("complemento", response.data.complemento);
+        });
+    }
+    setCep(e.target.value);
+  };
+
+  function mostrarCliente() {
+    setActive(true);
+  }
+
+  function ativarEndereco() {
+    setEnderecoActive(true);
+  }
+  function desativarEndereco() {
+    setEnderecoActive(false);
+  }
+
   return (
-    <div className="container mb-3">
+    <div className="container mb-3" onLoad={mostrarCliente}>
       <div className="row">
         <div className="col-md-6 d-flex justify-content-center align-content-center">
           <img src={imgCadastro} className="img-fluid" alt="" />
@@ -68,171 +102,272 @@ function Cadastro() {
           <Link className="btn btn-primary btn-voltar" to="/">
             Voltar
           </Link>
-          <p className="frase">
+          {/* <p className="frase">
             Encontre <span>aqui</span>
             <br /> seu <span>serviço doméstico</span>!
-          </p>
+          </p> */}
 
           <div className="tipo-cliente row text-center mt-4 mb-4">
-            <div className="col-6" onClick={cliente}>
+            <div
+              className={isActive ? "col-6 cliente-ativo" : "col-6"}
+              onClick={cliente}
+            >
               Cliente
             </div>
-            <div className="col-6 prestador" onClick={prestador}>
+            <div
+              className={isActive ? "col-6 prestador" : "col-6 prestador-ativo"}
+              onClick={prestador}
+            >
               Prestador
             </div>
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                Nome
-              </label>
-              <input
-                onChange={(e) => setNome(e.target.value)}
-                type="text"
-                className="form-control"
-                placeholder="Informe seu nome"
-              />
+            <div className="row navegacao-form">
+              <div className={isEnderecoActive ? "" : "esconde"}>
+                <button onClick={desativarEndereco} className="btn btn-primary">
+                  Anterior
+                </button>
+              </div>
+              <span className="contador-pagina">
+                {isEnderecoActive ? "2" : "1"}/2
+              </span>
+              <div
+                className={
+                  isEnderecoActive ? "esconde" : " d-flex justify-content-end"
+                }
+              >
+                <button onClick={ativarEndereco} className="btn btn-primary">
+                  Próximo
+                </button>
+              </div>
+            </div>
+            <div className={isEnderecoActive ? "esconde-geral" : ""}>
+              <h3 className="mt-3">Geral</h3>
+
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Nome
+                    </label>
+                    <input
+                      onChange={(e) => setNome(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu nome"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      E-mail
+                    </label>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      className="form-control"
+                      placeholder="Informe seu e-mail"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Senha
+                    </label>
+                    <input
+                      onChange={(e) => setSenha(e.target.value)}
+                      type="password"
+                      className="form-control"
+                      placeholder="Informe sua senha"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Confirmar senha
+                    </label>
+                    <input
+                      onChange={(e) => setSenhaVerificacao(e.target.value)}
+                      type="password"
+                      className="form-control"
+                      placeholder="Confirmar senha"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      CPF (apenas números)
+                    </label>
+                    <input
+                      onChange={(e) => setCpf(e.target.value)}
+                      type="text"
+                      max={14}
+                      className="form-control campo-cpf"
+                      placeholder="Informe seu CPF"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      RG
+                    </label>
+                    <input
+                      onChange={(e) => setRg(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu RG"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Gênero
+                    </label>
+                    <input
+                      onChange={(e) => setGenero(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu CPF"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Telefone
+                    </label>
+                    <input
+                      onChange={(e) => setTelefone(e.target.value)}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu telefone"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                E-mail
-              </label>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                className="form-control"
-                placeholder="Informe seu e-mail"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                Senha
-              </label>
-              <input
-                onChange={(e) => setSenha(e.target.value)}
-                type="password"
-                className="form-control"
-                placeholder="Informe sua senha"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                Confirmar senha
-              </label>
-              <input
-                onChange={(e) => setSenhaVerificacao(e.target.value)}
-                type="password"
-                className="form-control"
-                placeholder="Confirmar senha"
-              />
-            </div>
+            <div className={isEnderecoActive ? "" : "info-endereco"}>
+              <h3 className="mt-3">Endereço</h3>
+              <div className="mb-2">
+                <label htmlFor="" className="form-label">
+                  CEP
+                </label>
+                <input
+                  onBlur={(e) => procurarCep(e)}
+                  // onKeyDown={pegarCep(cep)}
+                  type="text"
+                  className="form-control"
+                  placeholder="Informe seu logradouro"
+                />
+              </div>
 
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                CPF (apenas números)
-              </label>
-              <input
-                onChange={(e) => setCpf(e.target.value)}
-                type="text"
-                max={14}
-                className="form-control campo-cpf"
-                placeholder="Informe seu CPF"
-              />
-            </div>
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Bairro
+                    </label>
+                    <input
+                      onChange={(e) => setBairro(e.target.value)}
+                      {...register("bairro")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu bairro"
+                    />
+                  </div>
+                </div>
 
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                RG
-              </label>
-              <input
-                onChange={(e) => setRg(e.target.value)}
-                type="text"
-                className="form-control"
-                placeholder="Informe seu RG"
-              />
-            </div>
+                <div className="col-md-4">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Complemento
+                    </label>
+                    <input
+                      // onChange={(e) => setBairro(e.target.value)}
+                      {...register("complemento")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe o complemento"
+                    />
+                  </div>
+                </div>
+              </div>
 
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                Gênero
-              </label>
-              <input
-                onChange={(e) => setGenero(e.target.value)}
-                type="text"
-                className="form-control"
-                placeholder="Informe seu CPF"
-              />
-            </div>
-
-            <div className="mb-2">
-              <label htmlFor="" className="form-label">
-                Telefone
-              </label>
-              <input
-                onChange={(e) => setTelefone(e.target.value)}
-                type="text"
-                className="form-control"
-                placeholder="Informe seu telefone"
-              />
-            </div>
-            {isActive ? (
-              <>
-                <h3 className="mt-3">Endereço</h3>
-                <div className="mb-2">
+              <div className="row">
+                <div className="mb-2 col-md-8">
                   <label htmlFor="" className="form-label">
-                    CEP
+                    Logradouro
                   </label>
                   <input
-                    onChange={(e) => setCep(e.target.value)}
+                    onChange={(e) => setLogradouro(e.target.value)}
+                    {...register("logradouro")}
                     type="text"
                     className="form-control"
                     placeholder="Informe seu logradouro"
                   />
                 </div>
-
-                <div className="row">
-                  <div className="mb-2 col-md-8">
-                    <label htmlFor="" className="form-label">
-                      Logradouro
-                    </label>
-                    <input
-                      onChange={(e) => setLogradouro(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      placeholder="Informe seu logradouro"
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <label htmlFor="" className="form-label">
-                      Número
-                    </label>
-                    <input
-                      onChange={(e) => setNumero(e.target.value)}
-                      type="number"
-                      className="form-control"
-                      placeholder="nº"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-2">
+                <div className="col-md-4">
                   <label htmlFor="" className="form-label">
-                    Bairro
+                    Número
                   </label>
                   <input
-                    onChange={(e) => setBairro(e.target.value)}
-                    type="text"
+                    onChange={(e) => setNumero(e.target.value)}
+                    type="number"
                     className="form-control"
-                    placeholder="Informe seu bairro"
+                    placeholder="nº"
                   />
                 </div>
-              </>
-            ) : (
-              <span></span>
-            )}
-            <button className="btn btn-primary w-100 mt-3">Entrar</button>
+              </div>
+
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Cidade
+                    </label>
+                    <input
+                      // onChange={(e) => setBairro(e.target.value)}
+                      {...register("cidade")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe sua cidade"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Estado
+                    </label>
+                    <input
+                      // onChange={(e) => setBairro(e.target.value)}
+                      {...register("uf")}
+                      type="text"
+                      className="form-control"
+                      placeholder="Informe seu estado"
+                    />
+                  </div>
+                </div>
+              </div>
+              <button className="btn btn-primary w-100 mt-3">Entrar</button>
+            </div>
           </form>
         </div>
       </div>

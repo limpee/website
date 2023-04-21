@@ -26,12 +26,12 @@ function Navbar() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="#servicos">
+                <a className="nav-link" href={false}>
                   Destaques
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#servicos">
+                <a className="nav-link" href={false}>
                   Sobre Nós
                 </a>
               </li>

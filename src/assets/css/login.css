@@ -24,6 +24,42 @@
 }
 
 .prestador {
-  color: #00a3dc;
   border-left: 1px solid #000;
+}
+
+.prestador-ativo {
+  color: white;
+  background-color: #00a3dc;
+  border-left: 1px solid #000;
+}
+
+.cliente-ativo {
+  color: white;
+  background-color: #00a3dc;
+  border-left: 1px solid #000;
+}
+
+.esconde-geral {
+  display: none;
+}
+
+.info-endereco {
+  display: none;
+}
+
+.esconde {
+  display: none;
+}
+
+.contador-pagina {
+  position: absolute;
+  width: 30px;
+  left: 43%;
+  font-size: 25px;
+  font-weight: bold;
+  color: #122a57;
+}
+
+.navegacao-form {
+  position: relative;
 }
