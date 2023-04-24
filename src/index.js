@@ -12,6 +12,7 @@ import Ranking from "./pages/Ranking";
 import Orcamento from "./pages/Orcamento";
 import NotificacoesCliente from "./pages/NotificacoesCliente";
 import NotificacoesPrestador from "./pages/NotificacoesPrestador";
+import Avaliacao from "./pages/Avaliacao";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/notificacoes-prestador",
     element: <NotificacoesPrestador />,
+  },
+  {
+    path: "/avaliacao",
+    element: <Avaliacao />,
   },
 ]);
 

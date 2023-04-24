@@ -53,6 +53,11 @@ function NavbarLogado() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="/avaliacao">
+                  Avaliação
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link btn-cadastrar" to="/">
                   Sair
                 </Link>
