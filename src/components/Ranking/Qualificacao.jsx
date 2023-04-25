@@ -2,6 +2,8 @@
 
 import fullStar from "../../assets/img/full-star.svg";
 import halfStar from "../../assets/img/half-star.svg";
+import { FaStar } from "react-icons/fa";
+
 function Qualificacao(props) {
   return (
     <div className="d-flex justify-content-between w-100 qualificacao p-2 rounded mb-2 mr-2">
@@ -9,11 +11,11 @@ function Qualificacao(props) {
         {props.posicao} - {props.nome}
       </span>
       <div className="avaliacao-card">
-        <img src={fullStar} alt="" />
-        <img src={fullStar} alt="" />
-        <img src={fullStar} alt="" />
-        <img src={fullStar} alt="" />
-        <img src={halfStar} alt="" />
+        <FaStar size={25} color="#ffc107" />
+        <FaStar size={25} color="#ffc107" />
+        <FaStar size={25} color="#ffc107" />
+        <FaStar size={25} color="#ffc107" />
+        <FaStar size={25} />
       </div>
     </div>
   );

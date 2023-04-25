@@ -22,7 +22,7 @@ function Servicos() {
       }
       setCards(cardsTemp);
     });
-  }, []);
+  }, [response]);
 
   return (
     <div>

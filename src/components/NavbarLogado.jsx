@@ -57,8 +57,17 @@ function NavbarLogado() {
                   Avaliação
                 </Link>
               </li>
+
               <li className="nav-item">
-                <Link className="nav-link btn-cadastrar" to="/">
+                <Link className="nav-link" to="/perfil-prestador">
+                  Prestador
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link btn-cadastrar btn-sair mt-2 text-center"
+                  to="/"
+                >
                   Sair
                 </Link>
               </li>

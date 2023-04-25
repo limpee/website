@@ -13,6 +13,7 @@ import Orcamento from "./pages/Orcamento";
 import NotificacoesCliente from "./pages/NotificacoesCliente";
 import NotificacoesPrestador from "./pages/NotificacoesPrestador";
 import Avaliacao from "./pages/Avaliacao";
+import PerfilPrestador from "./pages/PerfilPrestador";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/avaliacao",
     element: <Avaliacao />,
+  },
+  {
+    path: "/perfil-prestador",
+    element: <PerfilPrestador />,
   },
 ]);
 
