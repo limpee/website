@@ -12,13 +12,14 @@ function Servicos() {
   // const response = axios.get("/usuarios/lista");
 
   useEffect(() => {
+    console.log(prestador);
     let cardsTemp = [];
     for (let i = 0; i < prestador.length; i++) {
       cardsTemp.push(
         <Card
           key={i}
-          img={prestador[i].avatar}
-          nome={prestador[i].name}
+          // img={prestador[i].avatar}
+          nome={prestador[i].nome}
           id={prestador[i].id}
         />
       );

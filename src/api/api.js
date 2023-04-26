@@ -7,17 +7,17 @@ const apiProjeto = axios.create({
   baseURL: "http://localhost:8080",
 });
 
-apiProjeto.interceptors.request.use(
-  (config) => {
-    const token = sessionStorage.getItem("token");
-    if (token) {
-      config.headers["Authorization"] = `${token}`; // adiciona o cabeçalho de autorização com o token JWT
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// apiProjeto.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//       config.headers["Authorization"] = `Bearer ${token}`; // adiciona o cabeçalho de autorização com o token JWT
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 export default apiProjeto;
