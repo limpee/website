@@ -19,7 +19,7 @@ function Card(props) {
             <li>Tapetes</li>
           </ul>
         </div>
-        <Link className="btn btn-primary w-75" to="/orcamento">
+        <Link className="btn btn-primary w-75" to="/logado/orcamento">
           Orçamento
         </Link>
       </div>

@@ -35,7 +35,7 @@ function Login() {
                 placeholder="Informe sua senha"
               />
             </div>
-            <Link className="btn btn-primary w-100" to="/servicos">
+            <Link className="btn btn-primary w-100" to="/logado">
               Entrar
             </Link>
           </form>

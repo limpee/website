@@ -28,38 +28,38 @@ function NavbarLogado() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="/servicos">
+                <Link className="nav-link" to="/logado">
                   Serviços
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/ranking">
+                <Link className="nav-link" to="/logado/ranking">
                   Ranking
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/orcamento">
+                <Link className="nav-link" to="/logado/orcamento">
                   Orçamento
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/notificacoes-cliente">
+                <Link className="nav-link" to="/logado/notificacoes-cliente">
                   Notificações
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/notificacoes-prestador">
+                <Link className="nav-link" to="/logado/notificacoes-prestador">
                   Notificações prestador
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/avaliacao">
+                <Link className="nav-link" to="/logado/avaliacao">
                   Avaliação
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/perfil-prestador">
+                <Link className="nav-link" to="/logado/perfil-prestador">
                   Prestador
                 </Link>
               </li>

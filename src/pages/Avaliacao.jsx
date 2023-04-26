@@ -1,7 +1,5 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
 import "../assets/css/avaliacao.css";
 import StarRating from "../components/Avaliacao/StarRating";
 import { useState } from "react";
@@ -12,7 +10,6 @@ function Avaliacao() {
 
   return (
     <div>
-      <NavbarLogado />
       <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
@@ -68,7 +65,6 @@ function Avaliacao() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

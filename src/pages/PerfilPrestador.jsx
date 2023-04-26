@@ -1,12 +1,14 @@
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
-
 const PerfilPrestador = () => {
   return (
     <div>
-      <NavbarLogado />
-
-      <Footer />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <h3>Teste</h3>
+          </div>
+          <div className="col-md-6">Comentários</div>
+        </div>
+      </div>
     </div>
   );
 };

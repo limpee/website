@@ -1,14 +1,15 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
 import { Link } from "react-router-dom";
 import fotoPerfil from "../assets/img/foto-perfil.jpg";
+import { useContext } from "react";
+import PrestadorContext from "../context/PrestadorContext";
 
 function Orcamento() {
+  const user = useContext(PrestadorContext);
+
   return (
     <div>
-      <NavbarLogado />
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
@@ -101,7 +102,6 @@ function Orcamento() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
