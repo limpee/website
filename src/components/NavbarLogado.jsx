@@ -37,11 +37,11 @@ function NavbarLogado() {
                   Ranking
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/logado/orcamento">
+              {/* <li className="nav-item">
+                <Link className="nav-link" to="/logado/orcamento/:id">
                   Orçamento
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to="/logado/notificacoes-cliente">
                   Notificações

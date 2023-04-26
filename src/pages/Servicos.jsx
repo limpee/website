@@ -3,20 +3,24 @@
 import "../assets/css/servicos.css";
 import PrestadorContext from "../context/PrestadorContext";
 import Card from "../components/Servicos/Card";
-import axios from "../api/api";
 import { useState, useEffect, useContext } from "react";
 
 function Servicos() {
-  const { prestador, setPrestador } = useContext(PrestadorContext);
+  const { prestador } = useContext(PrestadorContext);
 
   let [cards, setCards] = useState([]);
-  // const response = axios.get("/cards");
+  // const response = axios.get("/usuarios/lista");
 
   useEffect(() => {
     let cardsTemp = [];
     for (let i = 0; i < prestador.length; i++) {
       cardsTemp.push(
-        <Card key={i} img={prestador[i].avatar} nome={prestador[i].name} />
+        <Card
+          key={i}
+          img={prestador[i].avatar}
+          nome={prestador[i].name}
+          id={prestador[i].id}
+        />
       );
     }
     setCards(cardsTemp);

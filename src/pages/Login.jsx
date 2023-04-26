@@ -1,7 +1,33 @@
 import imgLogin from "../assets/img/img-login.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosApi from "../api/api";
+import { useState } from "react";
+
+const URL_LOGIN = "/usuarios/login";
 
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(null);
+  const [senha, setSenha] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosApi.post(
+        URL_LOGIN,
+        JSON.stringify({ email, senha }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      localStorage.setItem("token", response?.data.token);
+      console.log(response?.data);
+
+      navigate("/logado");
+    } catch (e) {}
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -14,13 +40,14 @@ function Login() {
             <br /> enquanto você <span>estava fora</span>!
           </p>
 
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="mb-2">
               <label htmlFor="" className="form-label">
                 E-mail
               </label>
               <input
                 type="email"
+                onChange={(e) => setEmail(e.target.value)}
                 className="form-control"
                 placeholder="Informe seu e-mail"
               />
@@ -31,13 +58,12 @@ function Login() {
               </label>
               <input
                 type="text"
+                onChange={(e) => setSenha(e.target.value)}
                 className="form-control"
                 placeholder="Informe sua senha"
               />
             </div>
-            <Link className="btn btn-primary w-100" to="/logado">
-              Entrar
-            </Link>
+            <button className="btn btn-primary w-100">Entrar</button>
           </form>
         </div>
         <div className="col-md-6 d-flex justify-content-center align-content-center">

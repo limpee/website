@@ -7,7 +7,7 @@ import axiosApi from "../api/api";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
-const URL_CLIENTE = "/cliente";
+const URL_CLIENTE = "/usuarios";
 
 function Cadastro() {
   const [isActive, setActive] = useState(false);
@@ -40,20 +40,35 @@ function Cadastro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // console.log(
+      //   JSON.stringify({
+      //     nome,
+      //     email,
+      //     senha,
+      //     // cpf,
+      //     // rg,
+      //     genero,
+      //     // telefone,
+      //     // cep,
+      //     // logradouro,
+      //     // numero,
+      //     // bairro,
+      //   })
+      // );
       const response = await axiosApi.post(
         URL_CLIENTE,
         JSON.stringify({
-          name: nome,
+          nome,
           email,
           senha,
-          cpf,
-          rg,
+          // cpf,
+          // rg,
           genero,
-          telefone,
-          cep,
-          logradouro,
-          numero,
-          bairro,
+          // telefone,
+          // cep,
+          // logradouro,
+          // numero,
+          // bairro,
         }),
         {
           headers: { "Content-Type": "application/json" },
@@ -125,9 +140,9 @@ function Cadastro() {
           <form onSubmit={handleSubmit}>
             <div className="row navegacao-form">
               <div className={isEnderecoActive ? "" : "esconde"}>
-                <button onClick={desativarEndereco} className="btn btn-primary">
+                <div onClick={desativarEndereco} className="btn btn-primary">
                   Anterior
-                </button>
+                </div>
               </div>
               <span className="contador-pagina">
                 {isEnderecoActive ? "2" : "1"}/2
@@ -137,9 +152,9 @@ function Cadastro() {
                   isEnderecoActive ? "esconde" : " d-flex justify-content-end"
                 }
               >
-                <button onClick={ativarEndereco} className="btn btn-primary">
+                <div onClick={ativarEndereco} className="btn btn-primary">
                   Próximo
-                </button>
+                </div>
               </div>
             </div>
             <div className={isEnderecoActive ? "esconde-geral" : ""}>

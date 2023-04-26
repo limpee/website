@@ -1,12 +1,18 @@
 /** @format */
 
-import { Link } from "react-router-dom";
-import fotoPerfil from "../assets/img/foto-perfil.jpg";
-import { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import PrestadorContext from "../context/PrestadorContext";
 
 function Orcamento() {
-  const user = useContext(PrestadorContext);
+  const { prestador, prestadorEscolhido, setPrestadorEscolhido } =
+    useContext(PrestadorContext);
+  const id = useParams();
+
+  useEffect(() => {
+    setPrestadorEscolhido(prestador.filter((item) => item.id === id.id)[0]);
+    console.log(prestadorEscolhido);
+  }, [id.id, prestador, prestadorEscolhido, setPrestadorEscolhido]);
 
   return (
     <div>
@@ -85,12 +91,12 @@ function Orcamento() {
           <div className="col-md-4">
             <div className="perfil-prestador p-3 d-flex justify-content-center align-items-center flex-column">
               <div className="foto-perfil foto-card">
-                <img src={fotoPerfil} alt="" />
+                <img src={prestadorEscolhido.avatar} alt="" />
               </div>
               <div className="divisoria mt-3 mb-3"></div>
               {/* <div className="descricao d-flex align-self-start flex-column "> */}
               <div className="descricao  ">
-                <p>Maria Fátima</p>
+                <h2>{prestadorEscolhido.name}</h2>
                 <p>Especialidades:</p>
                 <ul>
                   <li>Vidros</li>

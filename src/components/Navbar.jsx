@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 
@@ -6,9 +7,9 @@ function Navbar() {
     <div id="header">
       <div className="container">
         <nav className="navbar navbar-expand-lg">
-          <a className="navbar-brand" href={false}>
+          <span className="navbar-brand">
             <img src={logo} className="img-fluid" alt="logo" />
-          </a>
+          </span>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,14 +27,10 @@ function Navbar() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href={false}>
-                  Destaques
-                </a>
+                <a className="nav-link">Destaques</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href={false}>
-                  Sobre Nós
-                </a>
+                <a className="nav-link">Sobre Nós</a>
               </li>
               <li className="nav-item">
                 <Link className="nav-link btn-entrar" to="/login">

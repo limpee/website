@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <Ranking />,
       },
       {
-        path: "/logado//orcamento",
+        path: "/logado//orcamento/:id",
         element: <Orcamento />,
       },
       {
