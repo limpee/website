@@ -1,7 +1,5 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
 import Qualificacao from "../components/Ranking/Qualificacao";
 import podio from "../assets/img/podio.svg";
 import "../assets/css/ranking.css";
@@ -33,7 +31,6 @@ function Ranking() {
 
   return (
     <div>
-      <NavbarLogado></NavbarLogado>
       <div className="container mt-5 mb-5">
         <div className="row mb-3">
           <div className="col-md-12">
@@ -60,7 +57,6 @@ function Ranking() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   );
 }

@@ -1,7 +1,5 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
 import NotificacaoAccordion from "../components/NotificacaoPrestador/NotificacaoAccordion";
 
 function NotificacoesPrestador() {
@@ -14,7 +12,6 @@ function NotificacoesPrestador() {
 
   return (
     <div>
-      <NavbarLogado />
       <div className="accordion" id="notificacoesId">
         <div className="container conteudo mt-5 mb-5">
           <div className="row">
@@ -35,7 +32,6 @@ function NotificacoesPrestador() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

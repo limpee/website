@@ -1,14 +1,20 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
-import { Link } from "react-router-dom";
-import fotoPerfil from "../assets/img/foto-perfil.jpg";
+import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import PrestadorContext from "../context/PrestadorContext";
 
 function Orcamento() {
+  const { prestador } = useContext(PrestadorContext);
+  const id = useParams();
+  const prestadorEscolhido = prestador.filter((item) => item.id == id.id)[0];
+
+  function teste() {
+    console.log(prestadorEscolhido);
+  }
+
   return (
     <div>
-      <NavbarLogado />
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
@@ -84,13 +90,13 @@ function Orcamento() {
           <div className="col-md-4">
             <div className="perfil-prestador p-3 d-flex justify-content-center align-items-center flex-column">
               <div className="foto-perfil foto-card">
-                <img src={fotoPerfil} alt="" />
+                {/* <img src={prestadorEscolhido.avatar} alt="" /> */}
               </div>
               <div className="divisoria mt-3 mb-3"></div>
               {/* <div className="descricao d-flex align-self-start flex-column "> */}
               <div className="descricao  ">
-                <p>Maria Fátima</p>
-                <p>Especialidades:</p>
+                {prestadorEscolhido && <h2>{prestadorEscolhido.nome}</h2>}
+                <p onClick={teste}>Especialidades:</p>
                 <ul>
                   <li>Vidros</li>
                   <li>Vidros</li>
@@ -101,7 +107,6 @@ function Orcamento() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

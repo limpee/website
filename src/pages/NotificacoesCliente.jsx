@@ -1,13 +1,10 @@
 /** @format */
 
-import Footer from "../components/Footer";
-import NavbarLogado from "../components/NavbarLogado";
 import ItemNotificacao from "../components/NotificacaoCliente/ItemNotificacao";
 
 function NotificacoesCliente() {
   return (
     <div>
-      <NavbarLogado />
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
@@ -25,7 +22,6 @@ function NotificacoesCliente() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

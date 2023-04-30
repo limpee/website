@@ -4,3 +4,12 @@
   cursor: pointer;
   width: 100px;
 }
+
+input[type="radio"] {
+  display: none;
+}
+
+textarea {
+  border-radius: 5px;
+  resize: none;
+}
