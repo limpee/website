@@ -21,7 +21,7 @@ function Cadastro() {
     setEnderecoActive(false);
   };
 
-  const { register, setValue } = useForm();
+  const { register, setValue, handleSubmit } = useForm();
 
   const [nome, setNome] = useState();
   const [senha, setSenha] = useState();
@@ -37,31 +37,31 @@ function Cadastro() {
   const [bairro, setBairro] = useState();
   const [isEnderecoActive, setEnderecoActive] = useState();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (e) => {
+    // e.preventDefault();
     try {
-      const response = await axiosApi.post(
-        URL_CLIENTE,
-        JSON.stringify({
-          name: nome,
-          email,
-          senha,
-          cpf,
-          rg,
-          genero,
-          telefone,
-          cep,
-          logradouro,
-          numero,
-          bairro,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      console.log(response?.data);
-      console.log(JSON.stringify(response));
+      console.log(e);
+      // const response = await axiosApi.post(
+      //   URL_CLIENTE,
+      //   JSON.stringify({
+      //     name: nome,
+      //     email,
+      //     senha,
+      //     cpf,
+      //     rg,
+      //     genero,
+      //     telefone,
+      //     cep,
+      //     logradouro,
+      //     numero,
+      //     bairro,
+      //   }),
+      //   {
+      //     headers: { "Content-Type": "application/json" },
+      //   }
+      // );
+      // console.log(response?.data);
+      // console.log(JSON.stringify(response));
     } catch (e) {}
   };
 
@@ -122,7 +122,7 @@ function Cadastro() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row navegacao-form">
               <div className={isEnderecoActive ? "" : "esconde"}>
                 <button onClick={desativarEndereco} className="btn btn-primary">
@@ -261,6 +261,11 @@ function Cadastro() {
                   </div>
                 </div>
               </div>
+
+              <div className="row">
+                <h2>Imagem</h2>
+                <input type="file" name="image" {...register("image")} />
+              </div>
             </div>
 
             <div className={isEnderecoActive ? "" : "info-endereco"}>
@@ -275,6 +280,7 @@ function Cadastro() {
                   type="text"
                   className="form-control"
                   placeholder="Informe seu logradouro"
+                  {...register("cep")}
                 />
               </div>
 
@@ -332,6 +338,7 @@ function Cadastro() {
                     type="number"
                     className="form-control"
                     placeholder="nº"
+                    {...register("numero")}
                   />
                 </div>
               </div>
