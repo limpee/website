@@ -23,14 +23,14 @@ function Cadastro() {
 
   const { register, setValue, handleSubmit } = useForm();
 
-  const [nome, setNome] = useState();
-  const [senha, setSenha] = useState();
-  const [senhaVerificacao, setSenhaVerificacao] = useState();
-  const [email, setEmail] = useState();
-  const [cpf, setCpf] = useState();
-  const [rg, setRg] = useState();
-  const [genero, setGenero] = useState();
-  const [telefone, setTelefone] = useState();
+  // const [nome, setNome] = useState();
+  // const [senha, setSenha] = useState();
+  // const [senhaVerificacao, setSenhaVerificacao] = useState();
+  // const [email, setEmail] = useState();
+  // const [cpf, setCpf] = useState();
+  // const [rg, setRg] = useState();
+  // const [genero, setGenero] = useState();
+  // const [telefone, setTelefone] = useState();
   const [cep, setCep] = useState();
   const [logradouro, setLogradouro] = useState();
   const [numero, setNumero] = useState();
@@ -40,28 +40,37 @@ function Cadastro() {
   const onSubmit = async (e) => {
     // e.preventDefault();
     try {
+      let tipoUsuario;
+      if (isActive) {
+        tipoUsuario = "cliente";
+      } else {
+        tipoUsuario = "prestador";
+      }
+
       console.log(e);
-      // const response = await axiosApi.post(
-      //   URL_CLIENTE,
-      //   JSON.stringify({
-      //     name: nome,
-      //     email,
-      //     senha,
-      //     cpf,
-      //     rg,
-      //     genero,
-      //     telefone,
-      //     cep,
-      //     logradouro,
-      //     numero,
-      //     bairro,
-      //   }),
-      //   {
-      //     headers: { "Content-Type": "application/json" },
-      //   }
-      // );
-      // console.log(response?.data);
-      // console.log(JSON.stringify(response));
+      const response = await axiosApi.post(
+        URL_CLIENTE,
+        JSON.stringify({
+          name: e.nome,
+          email: e.email,
+          senha: e.senha,
+          // cpf: e.cpf,
+          // rg: e.rg,
+          genero: e.genero,
+          // telefone: e.telefone,
+          // cep: e.cep,
+          // logradouro: e.logradouro,
+          // numero: e.numero,
+          // bairro: e.bairro,
+          // image: e.image,
+          tipoUsuario,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(response?.data);
+      console.log(JSON.stringify(response));
     } catch (e) {}
   };
 
@@ -124,7 +133,11 @@ function Cadastro() {
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="row navegacao-form">
-              <div className={isEnderecoActive ? "" : "esconde"}>
+              <div
+                className={
+                  isEnderecoActive ? "d-flex justify-content-start" : "esconde"
+                }
+              >
                 <div onClick={desativarEndereco} className="btn btn-primary">
                   Anterior
                 </div>
@@ -152,7 +165,8 @@ function Cadastro() {
                       Nome
                     </label>
                     <input
-                      onChange={(e) => setNome(e.target.value)}
+                      {...register("nome")}
+                      // onChange={(e) => setNome(e.target.value)}
                       type="text"
                       className="form-control"
                       placeholder="Informe seu nome"
@@ -165,7 +179,8 @@ function Cadastro() {
                       E-mail
                     </label>
                     <input
-                      onChange={(e) => setEmail(e.target.value)}
+                      {...register("email")}
+                      // onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       className="form-control"
                       placeholder="Informe seu e-mail"
@@ -175,32 +190,42 @@ function Cadastro() {
               </div>
 
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-12">
                   <div className="mb-2">
                     <label htmlFor="" className="form-label">
                       Senha
                     </label>
                     <input
-                      onChange={(e) => setSenha(e.target.value)}
+                      {...register("senha")}
+                      // onChange={(e) => setSenha(e.target.value)}
                       type="password"
                       className="form-control"
                       placeholder="Informe sua senha"
                     />
                   </div>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <div className="mb-2">
                     <label htmlFor="" className="form-label">
                       Confirmar senha
                     </label>
                     <input
+                      {...register("genero")}
                       onChange={(e) => setSenhaVerificacao(e.target.value)}
                       type="password"
                       className="form-control"
                       placeholder="Confirmar senha"
                     />
                   </div>
-                </div>
+                </div> */}
+              </div>
+
+              <div className="d-none">
+                <input
+                  type="text"
+                  {...register("tipo")}
+                  value={isActive ? "cliente" : "prestador"}
+                />
               </div>
 
               <div className="row">
@@ -210,7 +235,8 @@ function Cadastro() {
                       CPF (apenas números)
                     </label>
                     <input
-                      onChange={(e) => setCpf(e.target.value)}
+                      {...register("cpf")}
+                      // onChange={(e) => setCpf(e.target.value)}
                       type="text"
                       max={14}
                       className="form-control campo-cpf"
@@ -224,7 +250,8 @@ function Cadastro() {
                       RG
                     </label>
                     <input
-                      onChange={(e) => setRg(e.target.value)}
+                      {...register("rg")}
+                      // onChange={(e) => setRg(e.target.value)}
                       type="text"
                       className="form-control"
                       placeholder="Informe seu RG"
@@ -240,7 +267,8 @@ function Cadastro() {
                       Gênero
                     </label>
                     <input
-                      onChange={(e) => setGenero(e.target.value)}
+                      {...register("genero")}
+                      // onChange={(e) => setGenero(e.target.value)}
                       type="text"
                       className="form-control"
                       placeholder="Informe seu CPF"
@@ -253,7 +281,8 @@ function Cadastro() {
                       Telefone
                     </label>
                     <input
-                      onChange={(e) => setTelefone(e.target.value)}
+                      {...register("telefone")}
+                      // onChange={(e) => setTelefone(e.target.value)}
                       type="text"
                       className="form-control"
                       placeholder="Informe seu telefone"
@@ -373,7 +402,7 @@ function Cadastro() {
                   </div>
                 </div>
               </div>
-              <button className="btn btn-primary w-100 mt-3">Entrar</button>
+              <button className="btn btn-primary w-100 mt-3">Cadastrar</button>
             </div>
           </form>
         </div>
