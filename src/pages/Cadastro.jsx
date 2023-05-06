@@ -13,11 +13,13 @@ function Cadastro() {
   const [isActive, setActive] = useState(false);
   const prestador = () => {
     setActive(false);
+    console.log("virou prestador", isActive);
     setEnderecoActive(false);
   };
 
   const cliente = () => {
     setActive(true);
+    console.log("virou cliente", isActive);
     setEnderecoActive(false);
   };
 
@@ -39,15 +41,9 @@ function Cadastro() {
 
   const onSubmit = async (e) => {
     // e.preventDefault();
-    try {
-      let tipoUsuario;
-      if (isActive) {
-        tipoUsuario = "cliente";
-      } else {
-        tipoUsuario = "prestador";
-      }
+    let tipoUsuarioFinal = isActive ? "cliente" : "prestador";
 
-      console.log(e);
+    try {
       const response = await axiosApi.post(
         URL_CLIENTE,
         JSON.stringify({
@@ -63,7 +59,7 @@ function Cadastro() {
           // numero: e.numero,
           // bairro: e.bairro,
           // image: e.image,
-          tipoUsuario,
+          tipoUsuario: tipoUsuarioFinal,
         }),
         {
           headers: { "Content-Type": "application/json" },

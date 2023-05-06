@@ -25,8 +25,7 @@ const Duvidas = () => {
     libraries: ["places"],
   });
 
-  let endereco =
-    "Rua Haddock Lobo, 595 - Cerqueira César, São Paulo - SP, 01414-001";
+  let endereco = "Rua Haddock Lobo";
 
   let params = {
     address: endereco,
