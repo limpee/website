@@ -2,11 +2,21 @@
 
 import NotificacaoAccordion from "../components/NotificacaoPrestador/NotificacaoAccordion";
 
-function NotificacoesPrestador() {
+function Mapa() {
+  let enderecos = [
+    "Rua José Antônio Fontes",
+    "Avenida Paulista",
+    "Saldanho Marinho",
+  ];
   let notificacoes = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 3; i++) {
     notificacoes.push(
-      <NotificacaoAccordion key={i} id={"elemento" + i} sub={"sub" + i} />
+      <NotificacaoAccordion
+        key={i}
+        id={"elemento" + i}
+        sub={"sub" + i}
+        endereco={enderecos[i]}
+      />
     );
   }
 
@@ -22,13 +32,7 @@ function NotificacoesPrestador() {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-12">
-              {notificacoes}
-              {/* <NotificacaoAccordion />
-            <NotificacaoAccordion />
-            <NotificacaoAccordion />
-            <NotificacaoAccordion /> */}
-            </div>
+            <div className="col-md-12">{notificacoes}</div>
           </div>
         </div>
       </div>
@@ -36,4 +40,4 @@ function NotificacoesPrestador() {
   );
 }
 
-export default NotificacoesPrestador;
+export default Mapa;

@@ -1,10 +1,22 @@
 /** @format */
 
+import { useState } from "react";
+import Mapa from "../../pages/Mapa";
+
 function NotificacaoAccordion(props) {
+  const [isOpen, setIsOpen] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+
+  async function handleMapa(id) {
+    await setIsOpen(id);
+    console.log(id, isOpen);
+  }
+
   return (
     <div className="accordion-item mb-3">
       <h2 className="accordion-header">
         <button
+          onClick={() => handleMapa(props.id)}
           className="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
@@ -28,6 +40,10 @@ function NotificacaoAccordion(props) {
             <h3>Informações do cliente:</h3>
             <p>Tipo de serviço:</p>
             <p>Limpar vidros</p>
+
+            <div className="localizacao">
+              {isOpen === props.id && <Mapa endereco={props.endereco} />}
+            </div>
           </div>
           <div className="col-md-6">
             <form action="">

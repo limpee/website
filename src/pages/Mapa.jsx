@@ -4,13 +4,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Duvidas = () => {
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
-  // });
-  // if (!isLoaded) return <div>Carregando...</div>;
-  // return <Map />;
-
+const Mapa = (props) => {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -19,21 +13,21 @@ const Duvidas = () => {
     baseURL: "https://maps.googleapis.com",
   });
 
-  const loader = new Loader({
-    apiKey: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
-    version: "weekly",
-    libraries: ["places"],
-  });
-
-  let endereco = "Rua Haddock Lobo";
-
-  let params = {
-    address: endereco,
-    key: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
-  };
-
   useEffect(() => {
+    const loader = new Loader({
+      apiKey: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
+      version: "weekly",
+      libraries: ["places"],
+    });
+
+    let endereco = props.endereco;
+
+    let params = {
+      address: endereco,
+      key: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
+    };
     async function carregarLocalizacao() {
+      console.log("carregou: " + props.endereco);
       await apiMapsLocalizacao
         .get("/maps/api/geocode/json", { params: params })
         .then((response) => {
@@ -51,7 +45,7 @@ const Duvidas = () => {
             center: { lat: lat, lng: lng },
             zoom: 20,
           });
-
+          console.log(map);
           const marker = new google.maps.Marker({
             position: { lat: lat, lng: lng },
             map: map,
@@ -68,36 +62,23 @@ const Duvidas = () => {
     } else {
       carregarMapa();
     }
-  }, [loaded]);
-
-  function carregarMapa() {}
+  }, [apiMapsLocalizacao, lat, lng, loaded, props.endereco]);
 
   if (!loaded) {
     return (
-      <div className="container">
+      <div>
         <div id="map">Carregando...</div>
       </div>
     );
   } else {
     return (
-      <div onLoad={carregarMapa}>
-        <div className="container mt-5 mb-5">
-          <div className="row">
-            <div className="col-md-12">
-              <h3 className="title titulo-cards">Dúvidas</h3>
-              <p>Tire suas dúvidas aqui:</p>
-
-              <div className="col-md-12">
-                <div className="mapa" id="map"></div>
-                <h3>teste</h3>
-                {/* <GoogleMap zoom={10} center={{ lat: 44, lng: -80 }}></GoogleMap> */}
-              </div>
-            </div>
-          </div>
+      <div>
+        <div className="col-md-12">
+          <div className="mapa" id="map"></div>
         </div>
       </div>
     );
   }
 };
 
-export default Duvidas;
+export default Mapa;

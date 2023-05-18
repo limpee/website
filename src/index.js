@@ -16,7 +16,6 @@ import Avaliacao from "./pages/Avaliacao";
 import PerfilPrestador from "./pages/PerfilPrestador";
 import Home from "./pages/Home";
 import Logado from "./pages/Logado";
-import Duvidas from "./pages/Duvidas";
 
 const router = createBrowserRouter([
   {
@@ -57,10 +56,10 @@ const router = createBrowserRouter([
         path: "/logado/perfil-prestador",
         element: <PerfilPrestador />,
       },
-      {
-        path: "/logado/duvidas",
-        element: <Duvidas />,
-      },
+      // {
+      //   path: "/logado/duvidas",
+      //   element: <Mapa />,
+      // },
     ],
   },
   // {
