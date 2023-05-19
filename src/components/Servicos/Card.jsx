@@ -1,8 +1,19 @@
 /** @format */
 
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Card(props) {
+  const [esp, setEsp] = useState([]);
+
+  useEffect(() => {
+    const especia = [];
+    props.especializacoes.forEach((item) => {
+      especia.push(item.especialidade.descricao);
+    });
+    setEsp(especia);
+  }, []);
+
   return (
     <div className="col-md-3 mb-3">
       <div className="card-servico p-3 d-flex justify-content-center flex-column align-items-center">
@@ -15,8 +26,9 @@ function Card(props) {
         <div className="especialidades">
           <h5>Especialidades</h5>
           <ul>
-            <li>Vidros</li>
-            <li>Tapetes</li>
+            {esp.map((item) => (
+              <li key={item + "1"}>{item}</li>
+            ))}
           </ul>
         </div>
         <Link

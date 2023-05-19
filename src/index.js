@@ -52,28 +52,12 @@ const router = createBrowserRouter([
         path: "/logado/avaliacao",
         element: <Avaliacao />,
       },
-      {
-        path: "/logado/perfil-prestador",
-        element: <PerfilPrestador />,
-      },
       // {
-      //   path: "/logado/duvidas",
-      //   element: <Mapa />,
+      //   path: "/logado/perfil-prestador",
+      //   element: <PerfilPrestador />,
       // },
     ],
   },
-  // {
-  //   path: "/login",
-  //   element: <Login />,
-  // },
-  // {
-  //   path: "/cadastro",
-  //   element: <Cadastro />,
-  // },
-  // {
-  //   path: "/servicos",
-  //   element: <Servicos />,
-  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

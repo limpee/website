@@ -16,7 +16,8 @@ function Logado() {
     const getPrestadores = async () => {
       try {
         const response = await axios.get(
-          "/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
+          //"/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
+          "usuarios/lista",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

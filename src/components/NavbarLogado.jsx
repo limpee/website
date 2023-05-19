@@ -65,11 +65,6 @@ function NavbarLogado() {
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/duvidas">
-                  Dúvidas
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link
                   className="nav-link btn-cadastrar btn-sair mt-2 text-center"
                   to="/"

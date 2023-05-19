@@ -9,22 +9,25 @@ function Servicos() {
   const { prestador } = useContext(PrestadorContext);
 
   let [cards, setCards] = useState([]);
-  // const response = axios.get("/usuarios/lista");
+  // const response = axiosApi.get("/usuarios/lista");
 
   useEffect(() => {
-    console.log(prestador);
     let cardsTemp = [];
+    console.log(prestador);
     for (let i = 0; i < prestador.length; i++) {
+      // console.log(cardsTemp);
       cardsTemp.push(
         <Card
           key={i}
           // img={prestador[i].avatar}
           nome={prestador[i].nome}
           id={prestador[i].id}
+          especializacoes={prestador[i].especializacoes}
         />
       );
     }
     setCards(cardsTemp);
+    console.log(cardsTemp);
   }, [prestador]);
 
   return (
