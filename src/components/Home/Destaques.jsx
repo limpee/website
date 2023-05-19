@@ -11,8 +11,7 @@ function Destaques() {
         <div className="col-12 text-center">
           <h2 className="titulo-cards">Destaques</h2>
           <p>
-            Coloque sua localização e veja as pessoas disponíveis em sua
-            proximidade
+            Veja os principais destaques em nossa plataforma!
           </p>
         </div>
       </div>

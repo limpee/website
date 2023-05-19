@@ -27,10 +27,10 @@ function Navbar() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link">Destaques</a>
+                <a id="dest-sobre" className="nav-link">Destaques</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Sobre Nós</a>
+                <a id="dest-sobre" className="nav-link">Sobre Nós</a>
               </li>
               <li className="nav-item">
                 <Link className="nav-link btn-entrar" to="/login">

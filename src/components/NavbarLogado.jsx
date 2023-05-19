@@ -28,12 +28,12 @@ function NavbarLogado() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" to="/logado">
+                <Link id="nav-logado" className="nav-link" to="/logado">
                   Serviços
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/ranking">
+                <Link id="nav-logado" className="nav-link" to="/logado/ranking">
                   Ranking
                 </Link>
               </li>
@@ -43,29 +43,29 @@ function NavbarLogado() {
                 </Link>
               </li> */}
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/notificacoes-cliente">
+                <Link id="nav-logado" className="nav-link" to="/logado/notificacoes-cliente">
                   Notificações
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/notificacoes-prestador">
+                <Link id="nav-logado" className="nav-link" to="/logado/notificacoes-prestador">
                   Notificações prestador
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/avaliacao">
+                <Link id="nav-logado" className="nav-link" to="/logado/avaliacao">
                   Avaliação
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/perfil-prestador">
+                <Link id="nav-logado" className="nav-link" to="/logado/perfil-prestador">
                   Prestador
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/logado/duvidas">
+                <Link id="nav-logado" className="nav-link" to="/logado/duvidas">
                   Dúvidas
                 </Link>
               </li>

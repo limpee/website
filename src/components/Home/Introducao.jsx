@@ -28,7 +28,7 @@ function Introducao() {
               Se cadastre gratuitamente ou contate-nos caso tenha alguma dúvida
               sobre nosso serviço.
             </p>
-            <Link
+            <Link id="btn-cadastro-introducao"
               to="/cadastro"
               className="btn button-primary btn-primary button d-md-inline-block d-block"
             >

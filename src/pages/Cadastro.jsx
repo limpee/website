@@ -113,7 +113,7 @@ function Cadastro() {
           </p> */}
 
           <div className="tipo-cliente row text-center mt-4 mb-4">
-            <div
+            <div id="cliente"
               className={isActive ? "col-6 cliente-ativo" : "col-6"}
               onClick={cliente}
             >
