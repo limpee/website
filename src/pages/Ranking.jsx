@@ -10,18 +10,24 @@ function Ranking() {
   let [posicoes, setPosicoes] = useState([]);
 
   useEffect(() => {
-    const response = axios.get("/cards");
+    const response = axios.get("/usuarios/lista/ranking", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     response.then((resp) => {
       let vetor = resp.data;
+      console.log(vetor);
       let cardsTemp = [];
       for (let i = 0; i < vetor.length; i++) {
         cardsTemp.push(
           <Qualificacao
             key={i}
             posicao={i + 1}
-            img={vetor[i].avatar}
-            nome={vetor[i].name}
+            // img={vetor[i].avatar}
+            nome={vetor[i].nome}
+            nota={vetor[i].media}
           />
         );
       }
@@ -44,14 +50,20 @@ function Ranking() {
           <div className="col-md-6">
             <div className="container-podio">
               <img src={podio} alt="" className="img-fluid" />
-              <div className="primeiro">
-                <span>Primeiro</span>
+              <div className="primeiro" onClick={console.log(posicoes[1])}>
+                <span>
+                  {posicoes[0] !== undefined ? posicoes[0].props.nome : ""}
+                </span>
               </div>
               <div className="segundo">
-                <span>Segundo</span>
+                <span>
+                  {posicoes[1] !== undefined ? posicoes[1].props.nome : ""}
+                </span>
               </div>
               <div className="terceiro">
-                <span>Terceiro</span>
+                <span>
+                  {posicoes[2] !== undefined ? posicoes[2].props.nome : ""}
+                </span>
               </div>
             </div>
           </div>

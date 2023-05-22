@@ -16,7 +16,7 @@ function Card(props) {
 
   return (
     <div className="col-md-3 mb-3">
-      <div className="card-servico p-3 d-flex justify-content-center flex-column align-items-center">
+      <div className="card-servico p-3 d-flex justify-content-between flex-column align-items-center">
         <div className="perfil">
           <div className="foto-perfil foto-card m-auto">
             <img src={props.img} alt="" />

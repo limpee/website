@@ -26,9 +26,14 @@ function Login() {
       localStorage.setItem("token", response?.data.token);
       localStorage.setItem("id", response?.data.userId);
       localStorage.setItem("usuario", JSON.stringify(response?.data));
+      localStorage.setItem("tipoUsuario", response?.data.tipoUsuario);
       console.log(response?.data);
 
-      navigate("/logado");
+      if (localStorage.getItem("tipoUsuario") === "cliente") {
+        navigate("/logado/servicos");
+      } else {
+        navigate("/logado");
+      }
     } catch (e) {}
   };
 

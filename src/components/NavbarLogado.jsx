@@ -26,14 +26,19 @@ function NavbarLogado() {
             className="collapse navbar-collapse d-md-flex justify-content-end"
             id="navbarNav"
           >
+            <span style={{ color: "#00a3dc", fontWeight: "bold" }}>
+              Bem-vindo(a), {JSON.parse(localStorage.getItem("usuario")).nome}
+            </span>
             <ul className="navbar-nav">
+              {localStorage.getItem("tipoUsuario") === "cliente" && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/logado/servicos">
+                    Serviços
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link className="nav-link" to="/logado">
-                  Serviços
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/logado/ranking">
                   Ranking
                 </Link>
               </li>
@@ -42,21 +47,28 @@ function NavbarLogado() {
                   Orçamento
                 </Link>
               </li> */}
-              <li className="nav-item">
-                <Link className="nav-link" to="/logado/notificacoes-cliente">
-                  Notificações
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/logado/notificacoes-prestador">
-                  Notificações prestador
-                </Link>
-              </li>
-              <li className="nav-item">
+              {localStorage.getItem("tipoUsuario") === "cliente" && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/logado/notificacoes-cliente">
+                    Notificações
+                  </Link>
+                </li>
+              )}
+              {localStorage.getItem("tipoUsuario") === "prestador" && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to="/logado/notificacoes-prestador"
+                  >
+                    Notificações prestador
+                  </Link>
+                </li>
+              )}
+              {/* <li className="nav-item">
                 <Link className="nav-link" to="/logado/avaliacao">
                   Avaliação
                 </Link>
-              </li>
+              </li> */}
               {/* 
               <li className="nav-item">
                 <Link className="nav-link" to="/logado/perfil-prestador">

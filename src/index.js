@@ -31,10 +31,10 @@ const router = createBrowserRouter([
     path: "/logado",
     element: <Logado />,
     children: [
-      { path: "/logado", element: <Servicos /> },
+      { path: "/logado", element: <Ranking /> },
       {
-        path: "/logado/ranking",
-        element: <Ranking />,
+        path: "/logado/servicos",
+        element: <Servicos />,
       },
       {
         path: "/logado/orcamento/:id",
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <NotificacoesPrestador />,
       },
       {
-        path: "/logado/avaliacao",
+        path: "/logado/avaliacao/:id",
         element: <Avaliacao />,
       },
       // {

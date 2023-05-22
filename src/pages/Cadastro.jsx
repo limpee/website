@@ -1,6 +1,6 @@
 /** @format */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imgCadastro from "../assets/img/img-cadastro2.svg";
 import React, { useState } from "react";
 import axiosApi from "../api/api";
@@ -11,6 +11,8 @@ const URL_CLIENTE = "/usuarios";
 
 function Cadastro() {
   const [isActive, setActive] = useState(false);
+  const navigate = useNavigate();
+
   const prestador = () => {
     setActive(false);
     console.log("virou prestador", isActive);
@@ -84,11 +86,13 @@ function Cadastro() {
     console.log(JSON.stringify(usuarioObjeto));
 
     try {
-      const response = await axiosApi.post(URL_CLIENTE, usuarioObjeto, {
-        headers: { "Content-Type": "application/json" },
-      });
-      console.log(response?.data);
-      console.log(JSON.stringify(response));
+      await axiosApi
+        .post(URL_CLIENTE, usuarioObjeto, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((res) => {
+          navigate("/login");
+        });
     } catch (e) {
       console.log(e);
     }

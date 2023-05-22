@@ -1,6 +1,6 @@
 /** @format */
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import PrestadorContext from "../context/PrestadorContext";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ import axiosApi from "../api/api";
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
   const idPrestador = useParams();
+  const navigate = useNavigate();
   const prestadorEscolhido = prestador.filter(
     (item) => item.id === parseInt(idPrestador.id)
   )[0];
@@ -45,7 +46,7 @@ function Orcamento() {
       tipoServico: e.tipoServico,
       localServico: e.local,
       qtdComodos: e.comodos,
-      qtdBanheiros: e.banheiros,
+      qtdBanheiro: e.banheiros,
       cliente: localStorage.getItem("id"),
       prestador: idPrestador.id,
       geladeira: geladeira,
@@ -69,6 +70,7 @@ function Orcamento() {
       )
       .then((res) => {
         console.log(res);
+        navigate("/logado/servicos");
       });
   };
 

@@ -1,9 +1,16 @@
+/** @format */
+
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const StarRating = () => {
+const StarRating = ({ setValorNota }) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+
+  const definirRating = (ratingValue) => {
+    setRating(ratingValue);
+    setValorNota(ratingValue);
+  };
 
   return (
     <div>
@@ -15,7 +22,7 @@ const StarRating = () => {
               type="radio"
               name="rating"
               value={ratingValue}
-              onClick={() => setRating(ratingValue)}
+              onClick={() => definirRating(ratingValue)}
             />
             <FaStar
               className="star"
