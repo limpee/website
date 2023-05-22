@@ -27,7 +27,6 @@ const Mapa = (props) => {
       key: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
     };
     async function carregarLocalizacao() {
-      console.log("carregou: " + props.endereco);
       await apiMapsLocalizacao
         .get("/maps/api/geocode/json", { params: params })
         .then((response) => {
@@ -45,7 +44,6 @@ const Mapa = (props) => {
             center: { lat: lat, lng: lng },
             zoom: 20,
           });
-          console.log(map);
           const marker = new google.maps.Marker({
             position: { lat: lat, lng: lng },
             map: map,

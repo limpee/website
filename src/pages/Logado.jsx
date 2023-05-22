@@ -1,3 +1,5 @@
+/** @format */
+
 import { Outlet } from "react-router-dom";
 import NavbarLogado from "../components/NavbarLogado";
 import Footer from "../components/Footer";
@@ -24,6 +26,7 @@ function Logado() {
             },
           }
         );
+
         setPrestador(response.data);
       } catch (error) {
         console.log(error);

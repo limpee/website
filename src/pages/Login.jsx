@@ -1,3 +1,5 @@
+/** @format */
+
 import imgLogin from "../assets/img/img-login.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axiosApi from "../api/api";
@@ -22,6 +24,8 @@ function Login() {
       );
 
       localStorage.setItem("token", response?.data.token);
+      localStorage.setItem("id", response?.data.userId);
+      localStorage.setItem("usuario", JSON.stringify(response?.data));
       console.log(response?.data);
 
       navigate("/logado");

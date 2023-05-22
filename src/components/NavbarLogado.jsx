@@ -57,12 +57,12 @@ function NavbarLogado() {
                   Avaliação
                 </Link>
               </li>
-
+              {/* 
               <li className="nav-item">
                 <Link className="nav-link" to="/logado/perfil-prestador">
                   Prestador
                 </Link>
-              </li>
+              </li> */}
 
               <li className="nav-item">
                 <Link

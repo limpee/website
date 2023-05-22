@@ -1,17 +1,76 @@
 /** @format */
 
 import { Link, useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import PrestadorContext from "../context/PrestadorContext";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import axiosApi from "../api/api";
 
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
-  const id = useParams();
-  const prestadorEscolhido = prestador.filter((item) => item.id == id.id)[0];
+  const idPrestador = useParams();
+  const prestadorEscolhido = prestador.filter(
+    (item) => item.id === parseInt(idPrestador.id)
+  )[0];
+  const { register, handleSubmit } = useForm();
 
-  function teste() {
+  useEffect(() => {
     console.log(prestadorEscolhido);
-  }
+  }, []);
+
+  const submit = async (e) => {
+    let armario = false;
+    let janelas = false;
+    let geladeira = false;
+    let areaExterna = false;
+
+    if (e.servicos.filter((item) => item === "armario").length !== 0) {
+      armario = true;
+    }
+
+    if (e.servicos.filter((item) => item === "janelas").length !== 0) {
+      janelas = true;
+    }
+
+    if (e.servicos.filter((item) => item === "areaExterna").length !== 0) {
+      areaExterna = true;
+    }
+
+    if (e.servicos.filter((item) => item === "geladeira").length !== 0) {
+      geladeira = true;
+    }
+
+    let formularioObjeto = {
+      tipoServico: e.tipoServico,
+      localServico: e.local,
+      qtdComodos: e.comodos,
+      qtdBanheiros: e.banheiros,
+      cliente: localStorage.getItem("id"),
+      prestador: idPrestador.id,
+      geladeira: geladeira,
+      janelas: janelas,
+      armario: armario,
+      lavarRoupa: false,
+      passarRoupa: false,
+      areaExterna,
+    };
+
+    console.log(formularioObjeto);
+    await axiosApi
+      .post(
+        `/formulario-servico?idCliente=${localStorage.getItem(
+          "id"
+        )}&idPrestador=${idPrestador.id}`,
+        formularioObjeto,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <div>
@@ -25,28 +84,71 @@ function Orcamento() {
           <div className="col-md-8">
             <div className="container-formulario">
               <div className="formulario">
-                <form action="">
+                <form onSubmit={handleSubmit(submit)}>
                   <div className="mb-2">
                     <label htmlFor="" className="form-label">
-                      Uma pergunta qualquer
+                      Informe o tipo de serviço
                     </label>
-                    <input type="text" className="form-control" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      {...register("tipoServico")}
+                      required
+                    />
                   </div>
 
                   <div className="mb-2">
-                    <label htmlFor="">Escolha um:</label>
+                    <label htmlFor="" className="form-label">
+                      Qual é o local do serviço
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      {...register("local")}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Quantidade de comodos
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      {...register("comodos")}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-2">
+                    <label htmlFor="" className="form-label">
+                      Quantidade de banheiros
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      {...register("banheiros")}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-2">
+                    <label htmlFor="">Selecione:</label>
                     <div className="form-check">
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value=""
+                        value="armario"
+                        {...register("servicos")}
                         id="flexCheckDefault"
+                        checked
                       />
                       <label
                         className="form-check-label"
                         htmlFor="flexCheckDefault"
                       >
-                        Default checkbox
+                        Armário
                       </label>
                     </div>
 
@@ -54,34 +156,72 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value=""
+                        value="geladeira"
+                        {...register("servicos")}
                         id="flexCheckDefault2"
                       />
                       <label
                         className="form-check-label"
                         htmlFor="flexCheckDefault2"
                       >
-                        Default checkbox
+                        Geladeira
+                      </label>
+                    </div>
+
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value="janelas"
+                        {...register("servicos")}
+                        id="flexCheckDefault3"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault3"
+                      >
+                        Janelas
+                      </label>
+                    </div>
+
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value="geladeira"
+                        {...register("servicos")}
+                        id="flexCheckDefault4"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault4"
+                      >
+                        Geladeira
+                      </label>
+                    </div>
+
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value="areaExterna"
+                        id="flexCheckDefault5"
+                        {...register("servicos")}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault5"
+                      >
+                        Área externa
                       </label>
                     </div>
                   </div>
 
-                  <div className="mb-2">
-                    <label htmlFor="" className="form-label">
-                      Uma pergunta qualquer
-                    </label>
-                    <input type="text" className="form-control" />
-                  </div>
-
-                  <div className="mb-4">
-                    <label htmlFor="" className="form-label">
-                      Uma pergunta qualquer
-                    </label>
-                    <input type="text" className="form-control" />
-                  </div>
-
                   <div className="d-flex justify-content-end">
-                    <Link className="btn btn-primary">Orçamento</Link>
+                    <button className="btn btn-primary">Orçamento</button>
+                    {/* <Link className="btn btn-primary" role="button">
+                      Orçamento
+                    </Link> */}
                   </div>
                 </form>
               </div>
@@ -92,15 +232,17 @@ function Orcamento() {
               <div className="foto-perfil foto-card">
                 {/* <img src={prestadorEscolhido.avatar} alt="" /> */}
               </div>
-              <div className="divisoria mt-3 mb-3"></div>
+              <div className="divisoria mt-3 mb-3">
+                {/* {prestadorEscolhido.nome} */}
+              </div>
               {/* <div className="descricao d-flex align-self-start flex-column "> */}
               <div className="descricao  ">
                 {prestadorEscolhido && <h2>{prestadorEscolhido.nome}</h2>}
-                <p onClick={teste}>Especialidades:</p>
+                <p>Especialidades:</p>
                 <ul>
-                  <li>Vidros</li>
-                  <li>Vidros</li>
-                  <li>Vidros</li>
+                  {prestadorEscolhido.especializacoes.map((item, i) => (
+                    <li key={i}>{item.especialidade.descricao}</li>
+                  ))}
                 </ul>
               </div>
             </div>

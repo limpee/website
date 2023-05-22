@@ -25,52 +25,77 @@ function Cadastro() {
 
   const { register, setValue, handleSubmit } = useForm();
 
-  // const [nome, setNome] = useState();
-  // const [senha, setSenha] = useState();
-  // const [senhaVerificacao, setSenhaVerificacao] = useState();
-  // const [email, setEmail] = useState();
-  // const [cpf, setCpf] = useState();
-  // const [rg, setRg] = useState();
-  // const [genero, setGenero] = useState();
-  // const [telefone, setTelefone] = useState();
   const [cep, setCep] = useState();
-  const [logradouro, setLogradouro] = useState();
-  const [numero, setNumero] = useState();
-  const [bairro, setBairro] = useState();
   const [isEnderecoActive, setEnderecoActive] = useState();
 
   const onSubmit = async (e) => {
+    let contadorEspecializacao = 0;
     // e.preventDefault();
     let tipoUsuarioFinal = isActive ? "cliente" : "prestador";
+    let especialidades = [];
+
+    if (
+      e.especializacao1 !== "" &&
+      e.especializacao2 === "" &&
+      e.especializacao3 === ""
+    ) {
+      contadorEspecializacao = 1;
+    } else if (
+      e.especializacao1 !== "" &&
+      e.especializacao2 !== "" &&
+      e.especialidades3 === ""
+    ) {
+      contadorEspecializacao = 2;
+    } else if (
+      e.especializacao1 !== "" &&
+      e.especializacao2 !== "" &&
+      e.especializacao3 !== ""
+    ) {
+      contadorEspecializacao = 3;
+    }
+
+    let valoresEspecializacoes = [
+      e.especializacao1,
+      e.especializacao2,
+      e.especializacao3,
+    ];
+
+    for (let i = 0; i < contadorEspecializacao; i++) {
+      especialidades.push(valoresEspecializacoes[i]);
+    }
+
+    const usuarioObjeto = {
+      nome: e.nome,
+      email: e.email,
+      senha: e.senha,
+      genero: e.genero,
+      tipoUsuario: tipoUsuarioFinal,
+      enderecoDTO: {
+        cep: cep,
+        complemento: e.complemento,
+        logradouro: e.logradouro,
+        bairro: e.bairro,
+        numero: e.numero,
+        cidade: e.cidade,
+        estado: e.uf,
+      },
+      especialidades: especialidades,
+    };
+    console.log(JSON.stringify(usuarioObjeto));
 
     try {
-      const response = await axiosApi.post(
-        URL_CLIENTE,
-        JSON.stringify({
-          name: e.nome,
-          email: e.email,
-          senha: e.senha,
-          // cpf: e.cpf,
-          // rg: e.rg,
-          genero: e.genero,
-          // telefone: e.telefone,
-          // cep: e.cep,
-          // logradouro: e.logradouro,
-          // numero: e.numero,
-          // bairro: e.bairro,
-          // image: e.image,
-          tipoUsuario: tipoUsuarioFinal,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await axiosApi.post(URL_CLIENTE, usuarioObjeto, {
+        headers: { "Content-Type": "application/json" },
+      });
       console.log(response?.data);
       console.log(JSON.stringify(response));
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const procurarCep = (e) => {
+    console.log(e.target.value);
     if (e.target.value.length === 8) {
       axios
         .get(`https://viacep.com.br/ws/${e.target.value}/json/`)
@@ -200,20 +225,6 @@ function Cadastro() {
                     />
                   </div>
                 </div>
-                {/* <div className="col-md-6">
-                  <div className="mb-2">
-                    <label htmlFor="" className="form-label">
-                      Confirmar senha
-                    </label>
-                    <input
-                      {...register("genero")}
-                      onChange={(e) => setSenhaVerificacao(e.target.value)}
-                      type="password"
-                      className="form-control"
-                      placeholder="Confirmar senha"
-                    />
-                  </div>
-                </div> */}
               </div>
 
               <div className="d-none">
@@ -287,9 +298,61 @@ function Cadastro() {
                 </div>
               </div>
 
-              <div className="row">
+              {/* <div className="row">
                 <h2>Imagem</h2>
                 <input type="file" name="image" {...register("image")} />
+              </div> */}
+              <div className={isActive ? "info-endereco" : ""}>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="mb-2">
+                      <label htmlFor="" className="form-label">
+                        Especialização 1
+                      </label>
+                      <input
+                        {...register("especializacao1")}
+                        // onChange={(e) => setSenha(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        placeholder="Informe sua especialização"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="mb-2">
+                      <label htmlFor="" className="form-label">
+                        Especialização 2 (Opcional)
+                      </label>
+                      <input
+                        {...register("especializacao2")}
+                        // onChange={(e) => setSenha(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        placeholder="Informe sua expecialização"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="mb-2">
+                      <label htmlFor="" className="form-label">
+                        Especialização 3 (Opcioanl)
+                      </label>
+                      <input
+                        {...register("especializacao3")}
+                        // onChange={(e) => setSenha(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        placeholder="Informe sua especialização"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -301,11 +364,12 @@ function Cadastro() {
                 </label>
                 <input
                   onBlur={(e) => procurarCep(e)}
+                  onChange={(e) => setCep(e.target.value)}
                   // onKeyDown={pegarCep(cep)}
                   type="text"
                   className="form-control"
                   placeholder="Informe seu logradouro"
-                  {...register("cep")}
+                  // {...register("cep")}
                 />
               </div>
 
@@ -316,7 +380,7 @@ function Cadastro() {
                       Bairro
                     </label>
                     <input
-                      onChange={(e) => setBairro(e.target.value)}
+                      //onChange={(e) => setBairro(e.target.value)}
                       {...register("bairro")}
                       type="text"
                       className="form-control"
@@ -347,7 +411,7 @@ function Cadastro() {
                     Logradouro
                   </label>
                   <input
-                    onChange={(e) => setLogradouro(e.target.value)}
+                    //onChange={(e) => setLogradouro(e.target.value)}
                     {...register("logradouro")}
                     type="text"
                     className="form-control"
@@ -359,7 +423,7 @@ function Cadastro() {
                     Número
                   </label>
                   <input
-                    onChange={(e) => setNumero(e.target.value)}
+                    //onChange={(e) => setNumero(e.target.value)}
                     type="number"
                     className="form-control"
                     placeholder="nº"

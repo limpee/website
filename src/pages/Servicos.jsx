@@ -13,21 +13,23 @@ function Servicos() {
 
   useEffect(() => {
     let cardsTemp = [];
-    console.log(prestador);
-    for (let i = 0; i < prestador.length; i++) {
+    let vetorPrestador = prestador.filter(
+      (item) => item.tipoUsuario === "prestador"
+    );
+
+    for (let i = 0; i < vetorPrestador.length; i++) {
       // console.log(cardsTemp);
       cardsTemp.push(
         <Card
           key={i}
           // img={prestador[i].avatar}
-          nome={prestador[i].nome}
-          id={prestador[i].id}
-          especializacoes={prestador[i].especializacoes}
+          nome={vetorPrestador[i].nome}
+          id={vetorPrestador[i].id}
+          especializacoes={vetorPrestador[i].especializacoes}
         />
       );
     }
     setCards(cardsTemp);
-    console.log(cardsTemp);
   }, [prestador]);
 
   return (
