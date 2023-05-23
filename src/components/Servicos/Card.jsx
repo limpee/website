@@ -12,6 +12,7 @@ function Card(props) {
       especia.push(item.especialidade.descricao);
     });
     setEsp(especia);
+    console.log(props);
   }, []);
 
   return (
@@ -19,7 +20,7 @@ function Card(props) {
       <div className="card-servico p-3 d-flex justify-content-between flex-column align-items-center">
         <div className="perfil">
           <div className="foto-perfil foto-card m-auto">
-            <img src={props.img} alt="" />
+            <img src={`data:image/jpeg;base64,${props.img}`} alt="" />
           </div>
           <h2>{props.nome}</h2>
         </div>

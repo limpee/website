@@ -31,10 +31,23 @@ function Cadastro() {
   const [isEnderecoActive, setEnderecoActive] = useState();
 
   const onSubmit = async (e) => {
+    console.log(e.image[0]);
     let contadorEspecializacao = 0;
     // e.preventDefault();
     let tipoUsuarioFinal = isActive ? "cliente" : "prestador";
     let especialidades = [];
+
+    let formm = new FormData();
+
+    formm.append("file", e.image[0]);
+
+    axiosApi
+      .post("imagens", formm, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        console.log(res);
+      });
 
     if (
       e.especializacao1 !== "" &&
@@ -302,10 +315,14 @@ function Cadastro() {
                 </div>
               </div>
 
-              {/* <div className="row">
-                <h2>Imagem</h2>
-                <input type="file" name="image" {...register("image")} />
-              </div> */}
+              {!isActive ? (
+                <div className="row">
+                  <h2>Imagem</h2>
+                  <input type="file" name="image" {...register("image")} />
+                </div>
+              ) : (
+                ""
+              )}
               <div className={isActive ? "info-endereco" : ""}>
                 <div className="row">
                   <div className="col-md-12">
