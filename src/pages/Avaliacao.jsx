@@ -20,21 +20,18 @@ function Avaliacao() {
 
   const finalizar = () => {
     if (btnConcluir) {
+      console.log();
       let avaliacaoObjeto = {
         comentario,
         usuario: idPrestador.id,
         nota: valorNota,
       };
       axiosApi
-        .post(
-          `avaliacao?idUsuario=${localStorage.getItem("id")}`,
-          avaliacaoObjeto,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+        .post(`avaliacao?idUsuario=${idPrestador.id}`, avaliacaoObjeto, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         .then((res) => {
           console.log(res);
         });

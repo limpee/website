@@ -4,11 +4,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import PrestadorContext from "../context/PrestadorContext";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axiosApi from "../api/api";
 
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
+  // const [prestador, setPrestador] = useState([]);
   const idPrestador = useParams();
   const navigate = useNavigate();
   const prestadorEscolhido = prestador.filter(
@@ -16,8 +17,30 @@ function Orcamento() {
   )[0];
   const { register, handleSubmit } = useForm();
 
+  // const getPrestadores = async () => {
+  //   await axiosApi
+  //     .get(
+  //       //"/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
+  //       "usuarios/lista",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       prestador.push(res.data);
+  //     });
+  // };
+
+  const executar = async () => {
+    // await getPrestadores();
+  };
+
   useEffect(() => {
-    console.log(prestadorEscolhido);
+    executar();
+    console.log(prestador);
+    // console.log(prestadorEscolhido);
   }, []);
 
   const submit = async (e) => {
@@ -57,7 +80,7 @@ function Orcamento() {
       areaExterna,
     };
 
-    console.log(formularioObjeto);
+    // console.log(formularioObjeto);
     await axiosApi
       .post(
         `/formulario-servico?idCliente=${localStorage.getItem(

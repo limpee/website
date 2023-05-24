@@ -12,7 +12,6 @@ function Card(props) {
       especia.push(item.especialidade.descricao);
     });
     setEsp(especia);
-    console.log(props);
   }, []);
 
   return (

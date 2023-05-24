@@ -7,71 +7,87 @@ import { useState, useEffect, useContext } from "react";
 import axiosApi from "../api/api";
 
 function Servicos() {
-  const { prestador } = useContext(PrestadorContext);
+  // const { prestador } = useContext(PrestadorContext);
 
+  let [prestador, setPrestador] = useState([]);
   let [cards, setCards] = useState([]);
-  let [imageUrl, setImageUrl] = useState([]);
   let [imagens, setImagens] = useState([]);
   // const response = axiosApi.get("/usuarios/lista");
 
-  useEffect(() => {
-    let cardsTemp = [];
-    let vetorPrestador = prestador.filter(
-      (item) => item.tipoUsuario === "prestador"
-    );
+  const getPrestadores = async () => {
+    await axiosApi
+      .get(
+        //"/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
+        "usuarios/lista",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        prestador.push(res.data);
+      });
+  };
 
-    axiosApi
+  const getImagem = async () => {
+    await axiosApi
       .get("/imagens", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((res) => {
-        // let byte = res.data[0].foto;
-        // setByte(byte);
         let vetorImg = [];
         for (let i = 0; i < res.data.length; i++) {
           let item = res.data[i];
           vetorImg.push(item);
+          console.log(res.data);
+          imagens.push(item);
         }
-
-        setImagens(vetorImg);
       });
-
+  };
+  const getCards = async () => {
+    console.log("executarCards");
+    let cardsTemp = [];
+    let vetorPrestador = prestador[0].filter(
+      (item) => item.tipoUsuario === "prestador"
+    );
+    // console.log(prestador);
+    console.log(vetorPrestador);
     for (let i = 0; i < vetorPrestador.length; i++) {
-      console.log(i + 1, vetorPrestador.length);
       if (!(i + 1 > vetorPrestador.length)) {
         i++;
-
-        console.log(i);
         let infoImg = imagens.filter((item) => item.id === i);
-        console.log(infoImg);
-
         i--;
-        console.log(infoImg[0]);
+        console.log(imagens);
         cardsTemp.push(
           <Card
             key={i}
-            img={infoImg[0].foto}
+            img={infoImg[i].foto}
             nome={vetorPrestador[i].nome}
             id={vetorPrestador[i].id}
             especializacoes={vetorPrestador[i].especializacoes}
           />
         );
       }
-      // console.log(imagens);
     }
     setCards(cardsTemp);
-  }, [prestador]);
+  };
+  const executar = async () => {
+    await getPrestadores();
+    await getImagem();
+    await getCards();
+    // setLoaded(true);
+  };
+  useEffect(() => {
+    executar();
+  }, []);
 
   return (
     <div>
       <div className="container conteudo mt-5 mb-5">
-        {/* <img
-          src={`data:image/jpeg;base64,${byte}`}
-          alt=""
-          style={{ width: "500px", height: "500px" }}
-        /> */}
         <div className="row">
           <h2 className="title titulo-cards mb-3">Prestadores de serviços</h2>
           {cards}
