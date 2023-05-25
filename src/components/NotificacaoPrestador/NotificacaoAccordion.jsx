@@ -19,10 +19,11 @@ function NotificacaoAccordion(props) {
 
   const submit = async (e) => {
     // console.log(props.idNotificacao);
+    console.log(enviar);
     axiosApi
       .put(
         `/notificacoes/prestador/aprovar/${props.idNotificacao}?aprovado=${
-          enviar ? enviar : recusar
+          enviar ? enviar : false
         }&valorOrcamento=${e.valorOrcamento}`,
         null,
         {
@@ -49,7 +50,7 @@ function NotificacaoAccordion(props) {
           aria-controls={props.sub}
         >
           <div className="col-md-5 d-flex align-items-center">
-            <div className="foto-perfil "></div>
+            {/* <div className="foto-perfil "></div> */}
             <h4 className="ml-3">{props.nome}</h4>
           </div>
         </button>

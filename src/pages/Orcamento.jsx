@@ -6,41 +6,42 @@ import PrestadorContext from "../context/PrestadorContext";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axiosApi from "../api/api";
+import Comentario from "../components/Orcamento/Comentario";
 
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
-  // const [prestador, setPrestador] = useState([]);
   const idPrestador = useParams();
   const navigate = useNavigate();
   const prestadorEscolhido = prestador.filter(
     (item) => item.id === parseInt(idPrestador.id)
   )[0];
   const { register, handleSubmit } = useForm();
-
-  // const getPrestadores = async () => {
-  //   await axiosApi
-  //     .get(
-  //       //"/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
-  //       "usuarios/lista",
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       prestador.push(res.data);
-  //     });
-  // };
-
-  const executar = async () => {
-    // await getPrestadores();
-  };
+  const [comentarios, setComentarios] = useState();
 
   useEffect(() => {
-    executar();
-    console.log(prestador);
-    // console.log(prestadorEscolhido);
+    axiosApi
+      .get("avaliacao", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        let v = [];
+        for (let i = 0; i < res.data.length; i++) {
+          const item = res.data[i];
+          v.push(item);
+        }
+        let melhoresAvaliacoes = v.sort((a, b) => b.nota - a.nota).slice(0, 3);
+        let comentariosTemp = [];
+
+        melhoresAvaliacoes.forEach((item, i) => {
+          comentariosTemp.push(
+            <Comentario key={i} nota={item.nota} comentario={item.comentario} />
+          );
+        });
+        setComentarios(comentariosTemp);
+        console.log(comentarios);
+      });
   }, []);
 
   const submit = async (e) => {
@@ -270,6 +271,18 @@ function Orcamento() {
                   ))}
                 </ul>
               </div>
+            </div>
+
+            <div
+              style={{
+                border: "1px solid #000",
+                borderRadius: "5px",
+                padding: "10px",
+              }}
+              className="mt-3"
+            >
+              <h3 className="title titulo-cards mt-3">Avaliações</h3>
+              {comentarios}
             </div>
           </div>
         </div>

@@ -79,7 +79,6 @@ function Servicos() {
     await getPrestadores();
     await getImagem();
     await getCards();
-    // setLoaded(true);
   };
   useEffect(() => {
     executar();

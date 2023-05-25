@@ -13,7 +13,6 @@ function Qualificacao(props) {
     let vetorTeste = [];
 
     for (let i = 0; i < 5; i++) {
-      console.log(Math.round(props.nota));
       if (i < Math.round(props.nota))
         vetorTeste.push(<FaStar size={25} color="#ffc107" />);
 

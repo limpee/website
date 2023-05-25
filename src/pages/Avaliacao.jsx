@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import "../assets/css/avaliacao.css";
 import StarRating from "../components/Avaliacao/StarRating";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosApi from "../api/api";
 
 function Avaliacao() {
@@ -13,6 +13,8 @@ function Avaliacao() {
   const [valorNota, setValorNota] = useState(0);
   const [comentario, setComentario] = useState("");
   const idPrestador = useParams();
+  const parametros = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(idPrestador);
@@ -20,21 +22,38 @@ function Avaliacao() {
 
   const finalizar = () => {
     if (btnConcluir) {
-      console.log();
+      console.log(parametros);
       let avaliacaoObjeto = {
         comentario,
         usuario: idPrestador.id,
         nota: valorNota,
       };
+
       axiosApi
-        .post(`avaliacao?idUsuario=${idPrestador.id}`, avaliacaoObjeto, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        });
+        .put(
+          `notificacoes/cliente/finalizar/${parametros.idNotificacao}?finalizado=true`,
+          null,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then((res) => {});
+
+      if (valorNota !== 0) {
+        axiosApi
+          .post(`avaliacao?idUsuario=${idPrestador.id}`, avaliacaoObjeto, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            navigate("/logado");
+          });
+      } else {
+        navigate("/logado");
+      }
     }
   };
 

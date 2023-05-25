@@ -12,17 +12,6 @@ function Mapa() {
   ];
   const [notificacoes, setNotificacoes] = useState([]);
 
-  // for (let i = 0; i < 3; i++) {
-  //   notificacoes.push(
-  //     <NotificacaoAccordion
-  //       key={i}
-  //       id={"elemento" + i}
-  //       sub={"sub" + i}
-  //       endereco={enderecos[i]}
-  //     />
-  //   );
-  // }
-
   useEffect(() => {
     axiosApi
       .get(`notificacoes/prestador/${localStorage.getItem("id")}`, {
@@ -43,14 +32,11 @@ function Mapa() {
               endereco={`${item.cliente.endereco.logradouro}, ${item.cliente.endereco.numero}`}
             />
           );
-          // console.log(item);
         });
 
         setNotificacoes(vetor);
       });
-
-    // console.log(notificacoes.cliente);
-  }, []);
+  }, [setNotificacoes]);
 
   return (
     <div>
@@ -64,19 +50,7 @@ function Mapa() {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-12">
-              {notificacoes}
-              {/* <p>{notificacoes.length < 2 ? notificacoes.id : "1"}</p> */}
-              {/* {notificacoes} */}
-              {/* {notificacoes.map((item, index) => {
-                <NotificacaoAccordion
-                  key={index}
-                  // id={"elemento" + i}
-                  // sub={"sub" + i}
-                  // endereco={enderecos[i]}
-                />;
-              })} */}
-            </div>
+            <div className="col-md-12">{notificacoes}</div>
           </div>
         </div>
       </div>

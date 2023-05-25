@@ -41,32 +41,32 @@ function Cadastro() {
 
     formm.append("file", e.image[0]);
 
-    axiosApi
-      .post("imagens", formm, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    if (!isActive) {
+      axiosApi
+        .post("imagens", formm, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    }
 
     if (
       e.especializacao1 !== "" &&
       e.especializacao2 === "" &&
       e.especializacao3 === ""
     ) {
+      console.log("entrou1");
       contadorEspecializacao = 1;
-    } else if (
-      e.especializacao1 !== "" &&
-      e.especializacao2 !== "" &&
-      e.especialidades3 === ""
-    ) {
-      contadorEspecializacao = 2;
     } else if (
       e.especializacao1 !== "" &&
       e.especializacao2 !== "" &&
       e.especializacao3 !== ""
     ) {
       contadorEspecializacao = 3;
+    } else {
+      console.log("entrou2");
+      contadorEspecializacao = 2;
     }
 
     let valoresEspecializacoes = [
@@ -74,6 +74,16 @@ function Cadastro() {
       e.especializacao2,
       e.especializacao3,
     ];
+
+    console.log(valoresEspecializacoes, contadorEspecializacao);
+    console.log(
+      e.especializacao1 !== "" &&
+        e.especializacao2 !== "" &&
+        e.especializacao3 === "",
+      e.especializacao1,
+      e.especializacao2,
+      e.especializacao3
+    );
 
     for (let i = 0; i < contadorEspecializacao; i++) {
       especialidades.push(valoresEspecializacoes[i]);

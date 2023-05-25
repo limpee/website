@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <NotificacoesPrestador />,
       },
       {
-        path: "/logado/avaliacao/:id",
+        path: "/logado/avaliacao/:id/:idNotificacao",
         element: <Avaliacao />,
       },
       // {

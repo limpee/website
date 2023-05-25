@@ -66,13 +66,14 @@ function Login() {
                 Senha
               </label>
               <input
-                type="text"
+                type="password"
                 onChange={(e) => setSenha(e.target.value)}
                 className="form-control"
                 placeholder="Informe sua senha"
               />
             </div>
             <button className="btn btn-primary w-100">Entrar</button>
+            <Link to="/cadastro">Ainda não possui uma conta? Cadastre-se</Link>
           </form>
         </div>
         <div className="col-md-6 d-flex justify-content-center align-content-center">
