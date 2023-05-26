@@ -28,6 +28,7 @@ function NotificacoesCliente() {
                 id={item.id}
                 prestador={item.nomePrestador}
                 orcamento={item.valorOrcamento}
+                analise={item.aprovadoByPrestador}
               />
             );
           } else {

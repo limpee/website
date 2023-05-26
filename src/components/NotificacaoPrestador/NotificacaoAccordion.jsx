@@ -4,6 +4,7 @@ import { useState } from "react";
 import Mapa from "../../pages/Mapa";
 import axiosApi from "../../api/api";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
 
 function NotificacaoAccordion(props) {
   const [isOpen, setIsOpen] = useState(null);
@@ -13,12 +14,11 @@ function NotificacaoAccordion(props) {
 
   const { register, handleSubmit } = useForm();
 
-  async function handleMapa(id) {
-    await setIsOpen(id);
+  function handleMapa(id) {
+    setIsOpen(id);
   }
 
   const submit = async (e) => {
-    // console.log(props.idNotificacao);
     console.log(enviar);
     axiosApi
       .put(
@@ -33,12 +33,45 @@ function NotificacaoAccordion(props) {
         }
       )
       .then((res) => {
-        console.log(res);
+        toast.success("Orçamento enviado para o cliente", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
+      });
+  };
+
+  const rejeitar = () => {
+    setRecusar(true);
+    setEnviar(false);
+    axiosApi
+      .put(
+        `/notificacoes/prestador/aprovar/${
+          props.idNotificacao
+        }?aprovado=${false}&valorOrcamento=1`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        toast.success("O pedido foi rejeitado", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       });
   };
 
   return (
     <div className="accordion-item mb-3">
+      <ToastContainer></ToastContainer>
       <h2 className="accordion-header">
         <button
           onClick={() => handleMapa(props.id)}
@@ -79,7 +112,9 @@ function NotificacaoAccordion(props) {
             </div>
 
             <div className="localizacao">
-              {isOpen === props.id && <Mapa endereco={props.endereco} />}
+              {isOpen === props.id && (
+                <Mapa id={props.id} endereco={props.endereco} />
+              )}
             </div>
           </div>
           <div className="col-md-6">
@@ -94,16 +129,15 @@ function NotificacaoAccordion(props) {
                 {...register("valorOrcamento")}
               />
               <div className="d-flex justify-content-end">
-                <button
+                <div
                   className="btn btn-danger mt-3"
                   style={{ marginRight: "10px" }}
                   onClick={() => {
-                    setRecusar(true);
-                    setEnviar(false);
+                    rejeitar();
                   }}
                 >
                   Rejeitar
-                </button>
+                </div>
                 <button
                   className="btn btn-primary mt-3"
                   onClick={() => {

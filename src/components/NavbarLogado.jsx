@@ -50,7 +50,7 @@ function NavbarLogado() {
               {localStorage.getItem("tipoUsuario") === "cliente" && (
                 <li className="nav-item">
                   <Link className="nav-link" to="/logado/notificacoes-cliente">
-                    Notificações
+                    Meus pedidos
                   </Link>
                 </li>
               )}

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axiosApi from "../api/api";
 import Comentario from "../components/Orcamento/Comentario";
+import { ToastContainer, toast } from "react-toastify";
 
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
@@ -49,26 +50,44 @@ function Orcamento() {
     let janelas = false;
     let geladeira = false;
     let areaExterna = false;
+    console.log(Array.isArray(e.servicos));
 
-    if (e.servicos.filter((item) => item === "armario").length !== 0) {
+    if (e.servicos === "Armário") {
+      armario = true;
+    } else if (e.servicos.filter((item) => item === "Armário").length !== 0) {
       armario = true;
     }
 
-    if (e.servicos.filter((item) => item === "janelas").length !== 0) {
+    if (
+      Array.isArray(e.servicos) &&
+      e.servicos.filter((item) => item === "Janelas").length !== 0
+    ) {
+      janelas = true;
+    } else if (e.servicos === "Janelas") {
       janelas = true;
     }
 
-    if (e.servicos.filter((item) => item === "areaExterna").length !== 0) {
+    if (
+      Array.isArray(e.servicos) &&
+      e.servicos.filter((item) => item === "Área externa").length !== 0
+    ) {
+      areaExterna = true;
+    } else if (e.servicos === "Área externa") {
       areaExterna = true;
     }
 
-    if (e.servicos.filter((item) => item === "geladeira").length !== 0) {
+    if (
+      Array.isArray(e.servicos) &&
+      e.servicos.filter((item) => item === "Geladeira").length !== 0
+    ) {
+      geladeira = true;
+    } else if (e.servicos === "Geladeira") {
       geladeira = true;
     }
 
     let formularioObjeto = {
       tipoServico: e.tipoServico,
-      localServico: e.local,
+      localServico: "",
       qtdComodos: e.comodos,
       qtdBanheiro: e.banheiros,
       cliente: localStorage.getItem("id"),
@@ -81,7 +100,6 @@ function Orcamento() {
       areaExterna,
     };
 
-    // console.log(formularioObjeto);
     await axiosApi
       .post(
         `/formulario-servico?idCliente=${localStorage.getItem(
@@ -93,13 +111,19 @@ function Orcamento() {
         }
       )
       .then((res) => {
-        console.log(res);
-        navigate("/logado/servicos");
+        toast.success("O formulário foi enviado para avaliação", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          navigate("/logado/notificacoes-cliente");
+        }, 1800);
       });
   };
 
   return (
     <div>
+      <ToastContainer />
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
@@ -115,15 +139,30 @@ function Orcamento() {
                     <label htmlFor="" className="form-label">
                       Informe o tipo de serviço
                     </label>
+
+                    <select
+                      name=""
+                      className="form-select"
+                      {...register("tipoServico")}
+                      required
+                    >
+                      <option value="Limpeza empresarial">
+                        Limpeza empresarial
+                      </option>
+                      <option value="Limpeza doméstica">
+                        Limpeza doméstica
+                      </option>
+                    </select>
+                    {/* 
                     <input
                       type="text"
                       className="form-control"
                       {...register("tipoServico")}
                       required
-                    />
+                    /> */}
                   </div>
 
-                  <div className="mb-2">
+                  {/* <div className="mb-2">
                     <label htmlFor="" className="form-label">
                       Qual é o local do serviço
                     </label>
@@ -133,7 +172,7 @@ function Orcamento() {
                       {...register("local")}
                       required
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mb-2">
                     <label htmlFor="" className="form-label">
@@ -141,7 +180,9 @@ function Orcamento() {
                     </label>
                     <input
                       type="number"
+                      placeholder="Ex: 3"
                       className="form-control"
+                      min={1}
                       {...register("comodos")}
                       required
                     />
@@ -153,6 +194,8 @@ function Orcamento() {
                     </label>
                     <input
                       type="number"
+                      min={0}
+                      placeholder="Ex: 1"
                       className="form-control"
                       {...register("banheiros")}
                       required
@@ -165,7 +208,7 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="armario"
+                        value="Armário"
                         {...register("servicos")}
                         id="flexCheckDefault"
                         checked
@@ -182,7 +225,7 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="geladeira"
+                        value="Geladeira"
                         {...register("servicos")}
                         id="flexCheckDefault2"
                       />
@@ -198,7 +241,7 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="janelas"
+                        value="Janelas"
                         {...register("servicos")}
                         id="flexCheckDefault3"
                       />
@@ -214,7 +257,7 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="geladeira"
+                        value="Geladeira"
                         {...register("servicos")}
                         id="flexCheckDefault4"
                       />
@@ -230,7 +273,7 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="areaExterna"
+                        value="Área externa"
                         id="flexCheckDefault5"
                         {...register("servicos")}
                       />

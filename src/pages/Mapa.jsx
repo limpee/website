@@ -40,7 +40,7 @@ const Mapa = (props) => {
       await loader
         .load()
         .then((google) => {
-          const map = new google.maps.Map(document.getElementById("map"), {
+          const map = new google.maps.Map(document.getElementById(props.id), {
             center: { lat: lat, lng: lng },
             zoom: 20,
           });
@@ -65,14 +65,14 @@ const Mapa = (props) => {
   if (!loaded) {
     return (
       <div>
-        <div id="map">Carregando...</div>
+        <div id={props.id}>Carregando...</div>
       </div>
     );
   } else {
     return (
       <div>
         <div className="col-md-12">
-          <div className="mapa" id="map"></div>
+          <div className="mapa" id={props.id}></div>
         </div>
       </div>
     );
