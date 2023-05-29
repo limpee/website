@@ -18,7 +18,6 @@ function Ranking() {
 
     response.then((resp) => {
       let vetor = resp.data;
-      console.log(vetor);
       let cardsTemp = [];
       for (let i = 0; i < vetor.length; i++) {
         cardsTemp.push(
@@ -50,7 +49,7 @@ function Ranking() {
           <div className="col-md-6">
             <div className="container-podio">
               <img src={podio} alt="" className="img-fluid" />
-              <div className="primeiro" onClick={console.log(posicoes[1])}>
+              <div className="primeiro">
                 <span>
                   {posicoes[0] !== undefined ? posicoes[0].props.nome : ""}
                 </span>

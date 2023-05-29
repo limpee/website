@@ -5,10 +5,12 @@ import axiosApi from "../api/api";
 import { useEffect } from "react";
 import { useState } from "react";
 import PedidoAceito from "../components/NotificacaoCliente/PedidoAceito";
+import PedidoRejeitado from "../components/NotificacaoCliente/PedidoRejeitado";
 
 function NotificacoesCliente() {
   const [notificacoes, setNotificacoes] = useState();
   const [aprovados, setAprovados] = useState();
+  const [reprovados, setReprovados] = useState();
 
   useEffect(() => {
     axiosApi
@@ -18,10 +20,18 @@ function NotificacoesCliente() {
       .then((res) => {
         let vetor = [];
         let vetorAprovado = [];
-        console.log(res.data);
+        let vetorReprovado = [];
         res.data.forEach((item, i) => {
           console.log(item);
-          if (item.aprovadoByCliente === false) {
+          if (item.recusadoByPrestador) {
+            vetorReprovado.push(
+              <PedidoRejeitado
+                key={i}
+                id={item.id}
+                prestador={item.nomePrestador}
+              />
+            );
+          } else if (item.aprovadoByCliente === false) {
             vetor.push(
               <ItemNotificacao
                 key={i}
@@ -42,10 +52,11 @@ function NotificacoesCliente() {
                 // orcamento={item.valorOrcamento}
               />
             );
-            console.log(vetorAprovado);
+            // console.log(item.aprovadoByPrestador);
           }
         });
 
+        setReprovados(vetorReprovado);
         setAprovados(vetorAprovado);
         setNotificacoes(vetor);
       });
@@ -56,6 +67,8 @@ function NotificacoesCliente() {
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <div className="col-md-12">
+            <div className="col-md-12">{reprovados}</div>
+
             <h2 className="title titulo-cards mb-4">
               Notificações de orçamento
             </h2>

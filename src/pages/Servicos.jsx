@@ -16,17 +16,12 @@ function Servicos() {
 
   const getPrestadores = async () => {
     await axiosApi
-      .get(
-        //"/usuarios/lista/tipoUsuario?tipoUsuario=prestador",
-        "usuarios/lista",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
+      .get("usuarios/lista", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
-        console.log(res.data);
         prestador.push(res.data);
       });
   };
@@ -43,29 +38,26 @@ function Servicos() {
         for (let i = 0; i < res.data.length; i++) {
           let item = res.data[i];
           vetorImg.push(item);
-          console.log(res.data);
           imagens.push(item);
         }
       });
   };
   const getCards = async () => {
-    console.log("executarCards");
     let cardsTemp = [];
     let vetorPrestador = prestador[0].filter(
       (item) => item.tipoUsuario === "prestador"
     );
-    // console.log(prestador);
-    console.log(vetorPrestador);
+
     for (let i = 0; i < vetorPrestador.length; i++) {
       if (!(i + 1 > vetorPrestador.length)) {
         i++;
         let infoImg = imagens.filter((item) => item.id === i);
         i--;
-        console.log(imagens);
+
         cardsTemp.push(
           <Card
             key={i}
-            img={infoImg[i].foto}
+            img={infoImg[0].foto}
             nome={vetorPrestador[i].nome}
             id={vetorPrestador[i].id}
             especializacoes={vetorPrestador[i].especializacoes}

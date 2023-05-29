@@ -5,6 +5,7 @@ import Mapa from "../../pages/Mapa";
 import axiosApi from "../../api/api";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 function NotificacaoAccordion(props) {
   const [isOpen, setIsOpen] = useState(null);
@@ -112,6 +113,7 @@ function NotificacaoAccordion(props) {
             </div>
 
             <div className="localizacao">
+              <p>Endereço: {props.endereco}</p>
               {isOpen === props.id && (
                 <Mapa id={props.id} endereco={props.endereco} />
               )}
@@ -123,9 +125,9 @@ function NotificacaoAccordion(props) {
                 Valor do orçamento
               </label>
               <input
-                required
                 type="number"
                 className="form-control"
+                min={1}
                 {...register("valorOrcamento")}
               />
               <div className="d-flex justify-content-end">

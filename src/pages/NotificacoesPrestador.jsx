@@ -29,7 +29,11 @@ function Mapa() {
               formulario={item.formulario}
               nome={item.cliente.nome}
               idNotificacao={item.id}
-              endereco={`${item.cliente.endereco.logradouro}, ${item.cliente.endereco.numero}`}
+              endereco={
+                item.formulario.localServico === null
+                  ? `${item.cliente.endereco.logradouro}, ${item.cliente.endereco.numero}`
+                  : item.formulario.localServico
+              }
             />
           );
         });

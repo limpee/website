@@ -18,6 +18,8 @@ function Orcamento() {
   )[0];
   const { register, handleSubmit } = useForm();
   const [comentarios, setComentarios] = useState();
+  const [empresarial, setEmpresarial] = useState(false);
+  const [outro, setOutro] = useState(false);
 
   useEffect(() => {
     axiosApi
@@ -41,7 +43,6 @@ function Orcamento() {
           );
         });
         setComentarios(comentariosTemp);
-        console.log(comentarios);
       });
   }, []);
 
@@ -85,9 +86,11 @@ function Orcamento() {
       geladeira = true;
     }
 
+    console.log(e);
+
     let formularioObjeto = {
       tipoServico: e.tipoServico,
-      localServico: "",
+      localServico: e.enderecoEmpresa,
       qtdComodos: e.comodos,
       qtdBanheiro: e.banheiros,
       cliente: localStorage.getItem("id"),
@@ -98,6 +101,7 @@ function Orcamento() {
       lavarRoupa: false,
       passarRoupa: false,
       areaExterna,
+      outrosAdicional: e.textoOutro,
     };
 
     await axiosApi
@@ -119,6 +123,18 @@ function Orcamento() {
           navigate("/logado/notificacoes-cliente");
         }, 1800);
       });
+  };
+
+  const verificarValor = (e) => {
+    if (e.target.value === "Limpeza empresarial") {
+      setEmpresarial(true);
+    } else {
+      setEmpresarial(false);
+    }
+  };
+
+  const ativarOutro = (e) => {
+    setOutro(!outro);
   };
 
   return (
@@ -144,35 +160,51 @@ function Orcamento() {
                       name=""
                       className="form-select"
                       {...register("tipoServico")}
+                      onChange={(e) => verificarValor(e)}
                       required
                     >
-                      <option value="Limpeza empresarial">
-                        Limpeza empresarial
-                      </option>
                       <option value="Limpeza doméstica">
                         Limpeza doméstica
                       </option>
+                      <option value="Limpeza empresarial">
+                        Limpeza empresarial
+                      </option>
                     </select>
-                    {/* 
-                    <input
-                      type="text"
-                      className="form-control"
-                      {...register("tipoServico")}
-                      required
-                    /> */}
                   </div>
 
-                  {/* <div className="mb-2">
-                    <label htmlFor="" className="form-label">
-                      Qual é o local do serviço
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      {...register("local")}
-                      required
-                    />
-                  </div> */}
+                  {empresarial ? (
+                    <div>
+                      <div className="mb-2">
+                        <label htmlFor="" className="form-label">
+                          Nome da empresa
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Informe o nome da empresa"
+                          className="form-control"
+                          min={1}
+                          {...register("empresa")}
+                          required
+                        />
+                      </div>
+
+                      <div className="mb-2">
+                        <label htmlFor="" className="form-label">
+                          Endereço da empresa
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Informe o endereço"
+                          className="form-control"
+                          min={1}
+                          {...register("enderecoEmpresa")}
+                          required
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div className="mb-2">
                     <label htmlFor="" className="form-label">
@@ -211,7 +243,6 @@ function Orcamento() {
                         value="Armário"
                         {...register("servicos")}
                         id="flexCheckDefault"
-                        checked
                       />
                       <label
                         className="form-check-label"
@@ -257,22 +288,6 @@ function Orcamento() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        value="Geladeira"
-                        {...register("servicos")}
-                        id="flexCheckDefault4"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexCheckDefault4"
-                      >
-                        Geladeira
-                      </label>
-                    </div>
-
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
                         value="Área externa"
                         id="flexCheckDefault5"
                         {...register("servicos")}
@@ -284,13 +299,37 @@ function Orcamento() {
                         Área externa
                       </label>
                     </div>
+
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        value="outro"
+                        id="flexCheckDefault6"
+                        {...register("servicos")}
+                        onChange={(e) => ativarOutro(e)}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexCheckDefault6"
+                      >
+                        Outro
+                      </label>
+                    </div>
                   </div>
+
+                  {outro ? (
+                    <textarea
+                      cols={50}
+                      rows={5}
+                      {...register("textoOutro")}
+                    ></textarea>
+                  ) : (
+                    ""
+                  )}
 
                   <div className="d-flex justify-content-end">
                     <button className="btn btn-primary">Orçamento</button>
-                    {/* <Link className="btn btn-primary" role="button">
-                      Orçamento
-                    </Link> */}
                   </div>
                 </form>
               </div>
@@ -299,12 +338,16 @@ function Orcamento() {
           <div className="col-md-4">
             <div className="perfil-prestador p-3 d-flex justify-content-center align-items-center flex-column">
               <div className="foto-perfil foto-card">
-                {/* <img src={prestadorEscolhido.avatar} alt="" /> */}
+                <img
+                  src={`data:image/jpeg;base64,${localStorage.getItem(
+                    "imagemPrestador"
+                  )}`}
+                  alt=""
+                />
               </div>
               <div className="divisoria mt-3 mb-3">
                 {/* {prestadorEscolhido.nome} */}
               </div>
-              {/* <div className="descricao d-flex align-self-start flex-column "> */}
               <div className="descricao  ">
                 {prestadorEscolhido && <h2>{prestadorEscolhido.nome}</h2>}
                 <p>Especialidades:</p>
