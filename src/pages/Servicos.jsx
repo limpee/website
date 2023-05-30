@@ -5,6 +5,7 @@ import PrestadorContext from "../context/PrestadorContext";
 import Card from "../components/Servicos/Card";
 import { useState, useEffect, useContext } from "react";
 import axiosApi from "../api/api";
+import ExibirCards from "./ExibirCards";
 
 function Servicos() {
   // const { prestador } = useContext(PrestadorContext);
@@ -12,6 +13,7 @@ function Servicos() {
   let [prestador, setPrestador] = useState([]);
   let [cards, setCards] = useState([]);
   let [imagens, setImagens] = useState([]);
+  const [busca, setBusca] = useState("");
   // const response = axiosApi.get("/usuarios/lista");
 
   const getPrestadores = async () => {
@@ -57,7 +59,7 @@ function Servicos() {
         cardsTemp.push(
           <Card
             key={i}
-            img={infoImg[0].foto}
+            img={infoImg !== undefined ? infoImg[0].foto : ""}
             nome={vetorPrestador[i].nome}
             id={vetorPrestador[i].id}
             especializacoes={vetorPrestador[i].especializacoes}
@@ -81,7 +83,24 @@ function Servicos() {
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
           <h2 className="title titulo-cards mb-3">Prestadores de serviços</h2>
-          {cards}
+          <div
+            className="mb-3"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <label htmlFor="">Busca:</label>
+            <input
+              type="text"
+              className=""
+              style={{ width: "300px" }}
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+            />
+          </div>
+          <ExibirCards
+            cards={cards.filter((item) =>
+              item.props.nome.toLowerCase().includes(busca.toLocaleLowerCase())
+            )}
+          />
         </div>
       </div>
     </div>
