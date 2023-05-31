@@ -19,6 +19,7 @@ function Mapa() {
       })
       .then((res) => {
         let vetor = [];
+        console.log(res);
         res.data.forEach((item, i) => {
           console.log(item);
           vetor.push(

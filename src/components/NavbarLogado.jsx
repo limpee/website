@@ -26,9 +26,11 @@ function NavbarLogado() {
             className="collapse navbar-collapse d-md-flex justify-content-end"
             id="navbarNav"
           >
-            <span style={{ color: "#00a3dc", fontWeight: "bold" }}>
-              Bem-vindo(a), {JSON.parse(localStorage.getItem("usuario")).nome}
-            </span>
+            {localStorage.getItem("tipoUsuario") !== "admin" && (
+              <span style={{ color: "#00a3dc", fontWeight: "bold" }}>
+                Bem-vindo(a), {JSON.parse(localStorage.getItem("usuario")).nome}
+              </span>
+            )}
             <ul className="navbar-nav">
               {localStorage.getItem("tipoUsuario") === "cliente" && (
                 <li className="nav-item">
@@ -37,14 +39,13 @@ function NavbarLogado() {
                   </Link>
                 </li>
               )}
-              {localStorage.getItem("tipoUsuario") === "prestador" &&
-                localStorage.getItem("tipoUsuario") === "cliente" && (
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/logado">
-                      Ranking
-                    </Link>
-                  </li>
-                )}
+              {localStorage.getItem("tipoUsuario") !== "admin" && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/logado">
+                    Ranking
+                  </Link>
+                </li>
+              )}
               {/* <li className="nav-item">
                 <Link className="nav-link" to="/logado/orcamento/:id">
                   Orçamento
@@ -79,14 +80,13 @@ function NavbarLogado() {
                 </Link>
               </li> */}
 
-              {localStorage.getItem("tipoUsuario") === "cliente" &&
-                localStorage.getItem("tipoUsuario") === "prestador" && (
-                  <li className="nav-item">
-                    <Link to="/logado/editar" className="nav-link">
-                      Editar perfil
-                    </Link>
-                  </li>
-                )}
+              {localStorage.getItem("tipoUsuario") !== "admin" && (
+                <li className="nav-item">
+                  <Link to="/logado/editar" className="nav-link">
+                    Editar perfil
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link
                   className="nav-link btn-cadastrar btn-sair mt-2 text-center"
