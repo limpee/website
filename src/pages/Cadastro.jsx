@@ -107,7 +107,7 @@ function Cadastro() {
         .then((res) => {
           if (!isActive) {
             axiosApi
-              .post(`imagens/${res.data.id}`, formm, {
+              .post(`/imagens/${res.data.id}`, formm, {
                 headers: { "Content-Type": "multipart/form-data" },
               })
               .then((res) => {
@@ -115,7 +115,7 @@ function Cadastro() {
               });
             console.log(formm, documentow);
             axiosApi
-              .post(`documentos/${res.data.id}`, documentow, {
+              .post(`/documentos/${res.data.id}`, documentow, {
                 headers: { "Content-Type": "multipart/form-data" },
               })
               .then((res) => {
