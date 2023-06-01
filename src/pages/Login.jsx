@@ -4,6 +4,7 @@ import imgLogin from "../assets/img/img-login.svg";
 import { Link, useNavigate } from "react-router-dom";
 import axiosApi from "../api/api";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 const URL_LOGIN = "/usuarios/login";
 
@@ -39,12 +40,20 @@ function Login() {
         } else {
           navigate("/logado");
         }
-      } catch (e) {}
+      } catch (e) {
+        console.log("n foi");
+        toast.error("Falha ao realizar login", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+      }
     }
   };
 
   return (
     <div className="container">
+      <ToastContainer></ToastContainer>
+
       <div className="row">
         <div className="col-md-6 d-flex justify-content-center flex-column">
           <Link className="btn btn-primary btn-voltar" to="/">
