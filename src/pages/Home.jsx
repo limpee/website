@@ -1,3 +1,5 @@
+/** @format */
+
 import Introducao from "../components/Home/Introducao";
 import Navbar from "../components/Navbar";
 import Destaques from "../components/Home/Destaques";
@@ -10,7 +12,7 @@ function Home() {
     <div>
       <Navbar />
       <Introducao />
-      <Destaques />
+      {/* <Destaques /> */}
       <SobreNos />
       <Footer />
     </div>

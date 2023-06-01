@@ -26,9 +26,18 @@ function EdicaoPerfil() {
   const onSubmit = (e) => {
     let usuarioObjeto = usuario;
     console.log(usuario, usuarioObjeto);
-    usuarioObjeto.telefone = e.telefone;
-    usuarioObjeto.nome = e.nome;
-    usuarioObjeto.email = e.email;
+
+    if (e.telefone !== "") {
+      usuarioObjeto.telefone = e.telefone;
+    }
+
+    if (e.email !== "") {
+      usuarioObjeto.email = e.email;
+    }
+
+    if (e.nome !== "") {
+      usuarioObjeto.nome = e.nome;
+    }
 
     axiosApi
       .put(`usuarios/perfil/editar/${usuario.id}`, usuarioObjeto, {

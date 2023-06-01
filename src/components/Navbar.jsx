@@ -1,4 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/**
+ * eslint-disable jsx-a11y/anchor-is-valid
+ *
+ * @format
+ */
+
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 
@@ -26,12 +31,12 @@ function Navbar() {
             id="navbarNav"
           >
             <ul className="navbar-nav">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link">Destaques</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link">Sobre Nós</a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link btn-entrar" to="/login">
                   Entrar

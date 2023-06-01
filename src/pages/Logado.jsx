@@ -11,6 +11,7 @@ function Logado() {
   const [prestador, setPrestador] = useState([]);
   const [idPrestador, setIdPrestador] = useState();
   const [prestadorEscolhido, setPrestadorEscolhido] = useState(null);
+  const [isActive, setIsActive] = useState("ranking");
 
   useEffect(() => {});
 
@@ -48,7 +49,7 @@ function Logado() {
           setPrestadorEscolhido,
         }}
       >
-        <NavbarLogado />
+        <NavbarLogado isActive={isActive} setIsActive={setIsActive} />
         <Outlet />
         <Footer />
       </PrestadorContext.Provider>

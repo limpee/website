@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import "../assets/css/aprovacao.css";
 import axiosApi from "../api/api";
 import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function Aprovacao() {
   const [items, setItems] = useState([]);
@@ -34,6 +35,8 @@ function Aprovacao() {
   return (
     <>
       <NavbarLogado />
+      <ToastContainer></ToastContainer>
+
       <div className="container aprovacao-container mt-5 mb-5">
         <div className="row">
           <h2 className="title titulo-cards">Aprovação</h2>

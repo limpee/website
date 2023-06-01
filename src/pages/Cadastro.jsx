@@ -15,13 +15,11 @@ function Cadastro() {
 
   const prestador = () => {
     setActive(false);
-    console.log("virou prestador", isActive);
     setEnderecoActive(false);
   };
 
   const cliente = () => {
     setActive(true);
-    console.log("virou cliente", isActive);
     setEnderecoActive(false);
   };
 
@@ -47,7 +45,6 @@ function Cadastro() {
       e.especializacao2 === "" &&
       e.especializacao3 === ""
     ) {
-      console.log("entrou1");
       contadorEspecializacao = 1;
     } else if (
       e.especializacao1 !== "" &&
@@ -56,7 +53,6 @@ function Cadastro() {
     ) {
       contadorEspecializacao = 3;
     } else {
-      console.log("entrou2");
       contadorEspecializacao = 2;
     }
 
@@ -113,7 +109,6 @@ function Cadastro() {
               .then((res) => {
                 console.log(res);
               });
-            console.log(formm, documentow);
             axiosApi
               .post(`/documentos/${res.data.id}`, documentow, {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -413,7 +408,7 @@ function Cadastro() {
                   // onKeyDown={pegarCep(cep)}
                   type="text"
                   className="form-control"
-                  placeholder="Informe seu logradouro"
+                  placeholder="Informe seu CEP"
                   // {...register("cep")}
                 />
               </div>

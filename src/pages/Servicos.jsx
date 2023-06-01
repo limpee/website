@@ -55,6 +55,7 @@ function Servicos() {
         i++;
         let infoImg = imagens.filter((item) => item.idImagem === i);
         i--;
+        console.log(vetorPrestador[i].especializacoes);
         cardsTemp.push(
           <Card
             key={i}

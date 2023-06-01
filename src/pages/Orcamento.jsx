@@ -22,6 +22,22 @@ function Orcamento() {
   const [empresarial, setEmpresarial] = useState(false);
   const [outro, setOutro] = useState(false);
   const [imagem, setImagem] = useState();
+  const [prestadorFinal, setPrestadorFinal] = useState();
+  const [especializacoesDefinidas, setEspecializacoesDefinidas] = useState();
+
+  // const espe = async () => {
+  //   await axiosApi
+  //     .get(`/usuarios/${idPrestador.id}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       setPrestadorFinal(res.data);
+  //       setEspecializacoesDefinidas(prestadorFinal.especializacoes);
+  //     });
+  // };
 
   useEffect(() => {
     axiosApi.get(`/imagens/foto/${idPrestador.id}`).then((res) => {
@@ -40,7 +56,12 @@ function Orcamento() {
           const item = res.data[i];
           v.push(item);
         }
-        let melhoresAvaliacoes = v.sort((a, b) => b.nota - a.nota).slice(0, 3);
+        let melhoresAvaliacoes = v
+          .filter(
+            (item) => item.usuario.toString() === idPrestador.id.toString()
+          )
+          .sort((a, b) => b.nota - a.nota)
+          .slice(0, 3);
         let comentariosTemp = [];
 
         melhoresAvaliacoes.forEach((item, i) => {
@@ -364,12 +385,14 @@ function Orcamento() {
               </div>
               <div className="descricao  ">
                 {prestadorEscolhido && <h2>{prestadorEscolhido.nome}</h2>}
-                <p>Especialidades:</p>
-                <ul>
-                  {prestadorEscolhido.especializacoes.map((item, i) => (
-                    <li key={i}>{item.especialidade.descricao}</li>
-                  ))}
-                </ul>
+                {/* <p>Especialidades:</p>
+                {prestadorEscolhido && (
+                  <ul>
+                    {prestadorEscolhido.especializacoes.map((item, i) => (
+                      <li key={i}>{item.especialidade.descricao}</li>
+                    ))}
+                  </ul>
+                )} */}
               </div>
             </div>
 

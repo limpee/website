@@ -3,7 +3,7 @@
 import logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 
-function NavbarLogado() {
+function NavbarLogado({ isActive, setIsActive }) {
   return (
     <div id="header">
       <div className="container">
@@ -33,15 +33,35 @@ function NavbarLogado() {
             )}
             <ul className="navbar-nav">
               {localStorage.getItem("tipoUsuario") === "cliente" && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/logado/servicos">
+                <li
+                  className="nav-item"
+                  onClick={() => {
+                    setIsActive("servicos");
+                  }}
+                >
+                  <Link
+                    className={
+                      isActive === "servicos" ? "nav-link ativo" : "nav-link"
+                    }
+                    to="/logado/servicos"
+                  >
                     Serviços
                   </Link>
                 </li>
               )}
               {localStorage.getItem("tipoUsuario") !== "admin" && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/logado">
+                <li
+                  className="nav-item"
+                  onClick={() => {
+                    setIsActive("ranking");
+                  }}
+                >
+                  <Link
+                    className={
+                      isActive === "ranking" ? "nav-link ativo" : "nav-link"
+                    }
+                    to="/logado"
+                  >
                     Ranking
                   </Link>
                 </li>
@@ -52,37 +72,53 @@ function NavbarLogado() {
                 </Link>
               </li> */}
               {localStorage.getItem("tipoUsuario") === "cliente" && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/logado/notificacoes-cliente">
+                <li
+                  className="nav-item"
+                  onClick={() => {
+                    setIsActive("cliente");
+                  }}
+                >
+                  <Link
+                    className={
+                      isActive === "cliente" ? "nav-link ativo" : "nav-link"
+                    }
+                    to="/logado/notificacoes-cliente"
+                  >
                     Meus pedidos
                   </Link>
                 </li>
               )}
               {localStorage.getItem("tipoUsuario") === "prestador" && (
-                <li className="nav-item">
+                <li
+                  className="nav-item"
+                  onClick={() => {
+                    setIsActive("prestador");
+                  }}
+                >
                   <Link
-                    className="nav-link"
+                    className={
+                      isActive === "prestador" ? "nav-link ativo" : "nav-link"
+                    }
                     to="/logado/notificacoes-prestador"
                   >
                     Notificações prestador
                   </Link>
                 </li>
               )}
-              {/* <li className="nav-item">
-                <Link className="nav-link" to="/logado/avaliacao">
-                  Avaliação
-                </Link>
-              </li> */}
-              {/* 
-              <li className="nav-item">
-                <Link className="nav-link" to="/logado/perfil-prestador">
-                  Prestador
-                </Link>
-              </li> */}
 
               {localStorage.getItem("tipoUsuario") !== "admin" && (
-                <li className="nav-item">
-                  <Link to="/logado/editar" className="nav-link">
+                <li
+                  className="nav-item"
+                  onClick={() => {
+                    setIsActive("perfil");
+                  }}
+                >
+                  <Link
+                    to="/logado/editar"
+                    className={
+                      isActive === "perfil" ? "nav-link ativo" : "nav-link"
+                    }
+                  >
                     Editar perfil
                   </Link>
                 </li>

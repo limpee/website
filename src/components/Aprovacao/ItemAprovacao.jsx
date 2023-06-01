@@ -3,6 +3,7 @@
 import React from "react";
 import axiosApi from "../../api/api";
 import { saveAs } from "file-saver";
+import { ToastContainer, toast } from "react-toastify";
 
 function ItemAprovacao({ nome, id, objeto }) {
   const aprovar = () => {
@@ -10,7 +11,13 @@ function ItemAprovacao({ nome, id, objeto }) {
       .put(`/usuarios/admin/aprovar/${id}?isAprovado=true`, objeto)
       .then((res) => {
         console.log(res);
-        window.location.reload(false);
+        toast.success("O usuario foi aprovado", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       });
   };
 
@@ -19,31 +26,17 @@ function ItemAprovacao({ nome, id, objeto }) {
       .put(`/usuarios/admin/aprovar/${id}?isAprovado=false`, objeto)
       .then((res) => {
         console.log(res);
-        window.location.reload(false);
+        toast.success("O usuario foi reprovado", {
+          autoClose: 1500,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       });
   };
-  function downloadFile(byteArray, fileName) {
-    const blob = new Blob([byteArray], { type: "application/pdf" });
-    saveAs(blob, fileName);
-  }
 
   const baixar = () => {
-    // axiosApi.get(`/documentos/download/${id}`).then((res) => {
-    //   // const byteArray = res.data; // Your byte array here
-    //   // console.log(res);
-    //   // const fileName = "arquivo.pdf";
-    //   // downloadFile(byteArray, fileName);
-
-    //   const blob = new Blob([res.data], { type: "application/octet-stream" });
-    //   const downloadUrl = URL.createObjectURL(blob);
-
-    //   const downloadLink = document.createElement("a");
-    //   downloadLink.href = downloadUrl;
-    //   downloadLink.download = "arquivo.pdf";
-
-    //   downloadLink.click();
-    // });
-
     const downloadFile = () => {
       axiosApi({
         url: `/documentos/download/${id}`, // Substitua pelo URL correto do seu endpoint Java

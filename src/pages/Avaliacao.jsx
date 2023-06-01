@@ -57,6 +57,7 @@ function Avaliacao() {
             });
             setTimeout(() => {
               navigate("/logado");
+              
             }, 1800);
           });
       } else {
