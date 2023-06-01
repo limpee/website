@@ -6,6 +6,7 @@ import axiosApi from "../../api/api";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
+import { NumericFormat } from "react-number-format";
 
 function NotificacaoAccordion(props) {
   const [isOpen, setIsOpen] = useState(null);
@@ -20,7 +21,7 @@ function NotificacaoAccordion(props) {
   }
 
   const submit = async (e) => {
-    console.log(enviar);
+    console.log(e);
     axiosApi
       .put(
         `/notificacoes/prestador/aprovar/${props.idNotificacao}?aprovado=${
@@ -128,8 +129,23 @@ function NotificacaoAccordion(props) {
                 type="number"
                 className="form-control"
                 min={1}
+                placeholder="R$ 0,0"
                 {...register("valorOrcamento")}
               />
+              {/* <NumericFormat
+                className="form-control"
+                prefix="R$ "
+                thousandSeparator="."
+                decimalSeparator=","
+                allowNegative={false}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                placeholder="0,00"
+                min={1}
+                value={valor}
+                onChange={(e) => setValor(e.target.value)}
+                {...register("valorOrcamento")}
+              /> */}
               <div className="d-flex justify-content-end">
                 <div
                   className="btn btn-danger mt-3"

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axiosApi from "../api/api";
 import Comentario from "../components/Orcamento/Comentario";
 import { ToastContainer, toast } from "react-toastify";
+import imgPerfil from "../assets/img/perfil.jpg";
 
 function Orcamento() {
   const { prestador } = useContext(PrestadorContext);
@@ -20,8 +21,13 @@ function Orcamento() {
   const [comentarios, setComentarios] = useState();
   const [empresarial, setEmpresarial] = useState(false);
   const [outro, setOutro] = useState(false);
+  const [imagem, setImagem] = useState();
 
   useEffect(() => {
+    axiosApi.get(`/imagens/foto/${idPrestador.id}`).then((res) => {
+      setImagem(res.data.foto);
+    });
+
     axiosApi
       .get("avaliacao", {
         headers: {
@@ -139,6 +145,7 @@ function Orcamento() {
 
   return (
     <div>
+      {/* <img src={`data:image/jpeg;base64,${imagem}`} alt="" /> */}
       <ToastContainer />
       <div className="container conteudo mt-5 mb-5">
         <div className="row">
@@ -338,12 +345,19 @@ function Orcamento() {
           <div className="col-md-4">
             <div className="perfil-prestador p-3 d-flex justify-content-center align-items-center flex-column">
               <div className="foto-perfil foto-card">
-                <img
-                  src={`data:image/jpeg;base64,${localStorage.getItem(
-                    "imagemPrestador"
-                  )}`}
+                {/* <img
+                  src={
+                    imagem === ""
+                      ? `data:image/jpeg;base64,${imagem}`
+                      : imgPerfil
+                  }
                   alt=""
-                />
+                /> */}
+                {imagem !== undefined && (
+                  <img src={`data:image/jpeg;base64,${imagem}`} alt="" />
+                )}
+
+                {imagem === undefined && <img src={imgPerfil} alt="" />}
               </div>
               <div className="divisoria mt-3 mb-3">
                 {/* {prestadorEscolhido.nome} */}

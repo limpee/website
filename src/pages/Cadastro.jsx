@@ -38,18 +38,9 @@ function Cadastro() {
     let especialidades = [];
 
     let formm = new FormData();
-
+    let documentow = new FormData();
+    documentow.append("file", e.documento[0]);
     formm.append("file", e.image[0]);
-
-    if (!isActive) {
-      axiosApi
-        .post("imagens", formm, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) => {
-          console.log(res);
-        });
-    }
 
     if (
       e.especializacao1 !== "" &&
@@ -114,6 +105,23 @@ function Cadastro() {
           headers: { "Content-Type": "application/json" },
         })
         .then((res) => {
+          if (!isActive) {
+            axiosApi
+              .post(`imagens/${res.data.id}`, formm, {
+                headers: { "Content-Type": "multipart/form-data" },
+              })
+              .then((res) => {
+                console.log(res);
+              });
+            console.log(formm, documentow);
+            axiosApi
+              .post(`documentos/${res.data.id}`, documentow, {
+                headers: { "Content-Type": "multipart/form-data" },
+              })
+              .then((res) => {
+                console.log(res);
+              });
+          }
           navigate("/login");
         });
     } catch (e) {
@@ -305,7 +313,7 @@ function Cadastro() {
                       // onChange={(e) => setGenero(e.target.value)}
                       type="text"
                       className="form-control"
-                      placeholder="Informe seu CPF"
+                      placeholder="Informe seu gênero"
                     />
                   </div>
                 </div>
@@ -329,6 +337,12 @@ function Cadastro() {
                 <div className="row">
                   <h2>Imagem</h2>
                   <input type="file" name="image" {...register("image")} />
+                  <h2>Documento</h2>
+                  <input
+                    type="file"
+                    name="documento"
+                    {...register("documento")}
+                  />
                 </div>
               ) : (
                 ""

@@ -2,6 +2,7 @@
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import imgPerfil from "../../assets/img/perfil.jpg";
 
 function Card(props) {
   const [esp, setEsp] = useState([]);
@@ -19,7 +20,10 @@ function Card(props) {
       <div className="card-servico p-3 d-flex justify-content-between flex-column align-items-center">
         <div className="perfil">
           <div className="foto-perfil foto-card m-auto">
-            <img src={`data:image/jpeg;base64,${props.img}`} alt="" />
+            {props.img !== "" && (
+              <img src={`data:image/jpeg;base64,${props.img}`} alt="" />
+            )}
+            {props.img === "" && <img src={imgPerfil} alt="" />}
           </div>
           <h2>{props.nome}</h2>
         </div>

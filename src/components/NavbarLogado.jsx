@@ -91,6 +91,9 @@ function NavbarLogado() {
                 <Link
                   className="nav-link btn-cadastrar btn-sair mt-2 text-center"
                   to="/"
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
                 >
                   Sair
                 </Link>

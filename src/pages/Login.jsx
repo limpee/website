@@ -21,7 +21,7 @@ function Login() {
     } else {
       try {
         const response = await axiosApi.post(
-          URL_LOGIN,
+          "/usuarios/login",
           JSON.stringify({ email, senha }),
           {
             headers: { "Content-Type": "application/json" },

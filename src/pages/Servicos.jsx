@@ -53,13 +53,12 @@ function Servicos() {
     for (let i = 0; i < vetorPrestador.length; i++) {
       if (!(i + 1 > vetorPrestador.length)) {
         i++;
-        let infoImg = imagens.filter((item) => item.id === i);
+        let infoImg = imagens.filter((item) => item.idImagem === i);
         i--;
-
         cardsTemp.push(
           <Card
             key={i}
-            img={infoImg !== undefined ? infoImg[0].foto : ""}
+            img={infoImg.length !== 0 ? infoImg[0].foto : ""}
             nome={vetorPrestador[i].nome}
             id={vetorPrestador[i].id}
             especializacoes={vetorPrestador[i].especializacoes}
