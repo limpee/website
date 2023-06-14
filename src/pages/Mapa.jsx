@@ -15,7 +15,7 @@ const Mapa = (props) => {
 
   useEffect(() => {
     const loader = new Loader({
-      apiKey: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
+      apiKey: "",
       version: "weekly",
       libraries: ["places"],
     });
@@ -24,7 +24,7 @@ const Mapa = (props) => {
 
     let params = {
       address: endereco,
-      key: "AIzaSyALL64Q1I3R4QkSt-kbeG9HQGPAkSsUAq0",
+      key: "",
     };
     async function carregarLocalizacao() {
       await apiMapsLocalizacao
