@@ -1,0 +1,65 @@
+pipeline {
+
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+
+            steps {
+
+                echo "Teste de Hello Wordl!"
+
+            }
+
+        }
+
+        stage('Grant key permission') {
+
+            steps {
+
+                sh "chmod 400 /home/ec2-user/keys/frontend-key.pem"
+
+            }
+
+        }
+
+        stage('Integrate frontend-1 EC2') {
+
+            steps {
+
+                script {
+                    def remoteHost = 'ec2-54-83-111-60.compute-1.amazonaws.com'
+                    def remoteUser = 'ec2-user'
+                    def keyPath =  '/home/ec2-user/keys/frontend-key.pem'
+                    def remoteDir = '~/repo/frontend'
+
+                   sh """
+                   ssh -o StrictHostKeyChecking=no -i ${keyPath} ${remoteUser}@${remoteHost} "cd ${remoteDir} && sudo git fetch && sudo git pull"
+                   """
+                }
+
+            }
+
+        }
+
+        stage('Integrate frontend-2 EC2') {
+
+            steps {
+
+                script {
+                    def remoteHost = 'ec2-52-202-213-241.compute-1.amazonaws.com'
+                    def remoteUser = 'ec2-user'
+                    def keyPath =  '/home/ec2-user/keys/frontend-key.pem'
+                    def remoteDir = '~/repo/frontend'
+
+                   sh """
+                   ssh -o StrictHostKeyChecking=no -i ${keyPath} ${remoteUser}@${remoteHost} "cd ${remoteDir} && sudo git fetch && sudo git pull"
+                   """
+                }
+
+            }
+
+        }
+    }
+}
