@@ -32,10 +32,10 @@ pipeline {
                     def remoteHost = 'ec2-54-83-111-60.compute-1.amazonaws.com'
                     def remoteUser = 'ec2-user'
                     def keyPath =  '/home/ec2-user/keys/frontend-key.pem'
-                    def remoteDir = '~/repo/frontend'
+                    def remoteDir = '~/repo/website'
 
                    sh """
-                   ssh -o StrictHostKeyChecking=no -i ${keyPath} ${remoteUser}@${remoteHost} "cd ${remoteDir} && sudo git fetch && sudo git pull"
+                   ssh -o StrictHostKeyChecking=no -i ${keyPath} ${remoteUser}@${remoteHost} "cd ${remoteDir} && git fetch && git pull"
                    """
                 }
 
@@ -51,7 +51,7 @@ pipeline {
                     def remoteHost = 'ec2-52-202-213-241.compute-1.amazonaws.com'
                     def remoteUser = 'ec2-user'
                     def keyPath =  '/home/ec2-user/keys/frontend-key.pem'
-                    def remoteDir = '~/repo/frontend'
+                    def remoteDir = '~/website'
 
                    sh """
                    ssh -o StrictHostKeyChecking=no -i ${keyPath} ${remoteUser}@${remoteHost} "cd ${remoteDir} && sudo git fetch && sudo git pull"
